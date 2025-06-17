@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
+import 'package:glow_up_app/login/presentation/login_screen.dart';
+import 'package:glow_up_app/register/presentation/register_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FristScreen extends StatelessWidget {
@@ -57,11 +59,15 @@ class FristScreen extends StatelessWidget {
               SizedBox(
                 height: 26,
               ),
-              CustomButton(name: "Login", onTap: (){}),
+              CustomButton(name: "Login", onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+              }),
               SizedBox(
                 height: 15,
               ),
-              CustomButton(name: "Register", background: ColorsApp.p, onTap: (){})
+              CustomButton(name: "Register", background: ColorsApp.p, onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+              })
 
 
             ],
