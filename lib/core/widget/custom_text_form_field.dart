@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String hintText;
@@ -32,12 +33,15 @@ class CustomTextFormField extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 19,
-            fontWeight: FontWeight.w500,
-          ),
+
+      style: GoogleFonts.aDLaMDisplay(
+        textStyle: const TextStyle(
+            color: ColorsApp.p,
+            fontSize: 23,
+            fontWeight: FontWeight.w400
         ),
-        const SizedBox(height: 9),
+        ),),
+         SizedBox(height: 9),
         TextFormField(
           obscureText: isPassword ? isObscure : false,
           keyboardType: title == "Password"

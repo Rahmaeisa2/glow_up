@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
+import 'package:glow_up_app/question/presentation/question_onboarding.dart';
 import 'package:glow_up_app/test.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/theming/app_color.dart';
+import '../../register/presentation/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -93,8 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (value) {
                     if (value == null || value.isEmpty) {
                     return 'Please enter your email';
+                    }else if (value.length <8){
+                      return "password must be 8 char";
+
                     }
-                    return null;
                 } ,
                       hintText: "Password", title: "Password", controller: passwordController),
                   const SizedBox(height: 25,),
@@ -102,7 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       background:ColorsApp.p,
                       onTap: (){
                     if(formKey.currentState!.validate()){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>test()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>QuestionOnBoarding(
+
+                      )));
                     }
                       }),
                   SizedBox(
@@ -152,7 +158,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontWeight: FontWeight.w600,
 
                           ),),),
-                      TextButton(onPressed: () {}
+                      TextButton(onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                      }
                       , child: Text(
                         "Sing Up",
                           style: GoogleFonts.alexandria(

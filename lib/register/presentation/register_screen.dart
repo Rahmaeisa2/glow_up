@@ -20,6 +20,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController confirmController =TextEditingController();
   bool _isObscure=true;
   final formKey =GlobalKey<FormState>();
+  bool value = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,25 +127,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     validator: (value){
                       if(value== null || value.isEmpty){
                         return "Please enter your password";
-                      }
-                      return null;
-                    }
+                      }else if(confirmController.text!=passwordController.text){
+    return "confirmation password must be same as password";
+                    }}
                 ),
                 const SizedBox(height: 17,),
-                CustomButton(name: "Register",
-                    background:ColorsApp.p,
-                    onTap: (){
-                  if(formKey.currentState!.validate()){
-                    if(passwordController.text != confirmController.text) {
-                      ScaffoldMessenger.of(context).showSnackBar
-                        (SnackBar(content: Text("Passwords do not match")));
-                      return;
+                CustomButton(
+                  name: "Register",
+                  background: ColorsApp.p,
+                  onTap: () {
+                    if (formKey.currentState!.validate()) {
+                      if (passwordController.text != confirmController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Passwords do not match')),
+                        );
+                        return; //
+                      }
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => test()),
+                      );
                     }
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>test()));
+                  },
+                )
 
-
-                  }
-                    })
 
 
               ],
