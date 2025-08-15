@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theming/app_color.dart';
+import '../../../core/widget/user-answers.dart';
 class GenderSelectionWidget extends StatefulWidget {
 
   GenderSelectionWidget({super.key});
@@ -50,18 +51,20 @@ bool? isMale =null;
             children: [
               Expanded(
                 child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isMale = true;
-                    });
-                  },
+           onTap: () {
+    setState(() {
+    isMale = true;
+    });
+    UserAnswer.gender = "Male";
+    },
+
                   child: Container(
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(12),
                      border: Border.all(
-                        color: (isMale == true) ? Colors.indigo: Colors.transparent,
+                        color: (isMale == true) ? ColorsApp.p : Colors.transparent,
                        width: 3,
                      ),
                     ),
@@ -86,17 +89,21 @@ bool? isMale =null;
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isMale = false;
-                    });
+                      setState(() {
+                        isMale = false;
+                      });
+                      UserAnswer.gender = "female";
+
                   },
+
                   child: Container(
+
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: (isMale == false) ? Colors.indigo : Colors.transparent,
+                        color: (isMale == false) ? ColorsApp.p : Colors.transparent,
                         width: 3,
                       ),
                     ),

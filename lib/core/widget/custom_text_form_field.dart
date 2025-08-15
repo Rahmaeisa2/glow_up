@@ -13,8 +13,9 @@ class CustomTextFormField extends StatelessWidget {
   final VoidCallback? onToggle;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  void Function(String)? onChanged;
 
-  const CustomTextFormField({
+   CustomTextFormField({
     super.key,
     required this.hintText,
     required this.title,
@@ -23,6 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.isPassword = false,
     this.isObscure = false,
+    this.onChanged,
     this.onToggle, this.suffixIcon,
   });
 
@@ -43,6 +45,7 @@ class CustomTextFormField extends StatelessWidget {
         ),),
          SizedBox(height: 9),
         TextFormField(
+          onChanged: onChanged,
           obscureText: isPassword ? isObscure : false,
           keyboardType: title == "Password"
               ? TextInputType.visiblePassword

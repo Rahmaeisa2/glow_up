@@ -1,6 +1,8 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
 import 'package:glow_up_app/question/presentation/question_onboarding.dart';
@@ -104,13 +106,89 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 25,),
                   CustomButton(name: "Login",
                       background:ColorsApp.p,
-                      onTap: (){
-                    if(formKey.currentState!.validate()){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>QuestionOnBoarding(
+                      onTap: () async {
+                        if (formKey.currentState!.validate()) {
+                          final email = loginController.text.trim();
+                          final password = passwordController.text.trim();
 
-                      )));
-                    }
-                      }),
+                          if (email.isEmpty || password.isEmpty) {
+                            await AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Missing Information',
+                              desc: 'Please enter both email and password.',
+                              btnOkOnPress: () {},
+                            ).show();
+                            return;
+                          }
+
+                          try {
+                            final userCredential = await FirebaseAuth.instance
+                                .signInWithEmailAndPassword(email: email, password: password);
+
+                            final user = FirebaseAuth.instance.currentUser;
+
+                            if (user != null && user.emailVerified) {
+                              print("✅ Email verified. Logged in: ${user.email}");
+                              Navigator.of(context).pushReplacementNamed("question");
+                            } else {
+                              print("⚠️ Email not verified.");
+                              await AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.warning,
+                                animType: AnimType.rightSlide,
+                                title: 'Email not verified',
+                                desc: 'Please verify your email before logging in.',
+                                btnOkOnPress: () async {
+                                  await user?.sendEmailVerification();
+                                },
+                              ).show();
+                            }
+                          } on FirebaseAuthException catch (e) {
+                            print("❌ FirebaseAuthException: ${e.code} - ${e.message}");
+
+                            String errorMessage;
+                            switch (e.code) {
+                              case 'user-not-found':
+                                errorMessage = 'No user found for that email.';
+                                break;
+                              case 'wrong-password':
+                                errorMessage = 'Wrong password provided.';
+                                break;
+                              case 'invalid-email':
+                                errorMessage = 'Invalid email address format.';
+                                break;
+                              case 'invalid-credential':
+                                errorMessage = 'Invalid email or password.';
+                                break;
+                              default:
+                                errorMessage = e.message ?? 'Login failed. Please try again.';
+                            }
+
+                            await AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Login Error',
+                              desc: errorMessage,
+                              btnOkOnPress: () {},
+                            ).show();
+                          } catch (e) {
+                            print("⚠️ General Error: $e");
+                            await AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Error',
+                              desc: 'Something went wrong. Please try again.',
+                              btnOkOnPress: () {},
+                            ).show();
+                          }
+                        }
+                      }
+
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -133,7 +211,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           width: 15,
                         ),
-                        TextButton(onPressed: (){}, child: Text(
+                        TextButton(onPressed: ()async{
+                          await FirebaseAuth.instance.sendPasswordResetEmail(email: loginController.text.trim());
+
+                        }, child: Text(
                         "Forget Password?" ,
                         style: GoogleFonts.alexandria(
                           textStyle: TextStyle(

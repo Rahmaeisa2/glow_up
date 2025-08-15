@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
@@ -135,21 +137,57 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 CustomButton(
                   name: "Register",
                   background: ColorsApp.p,
-                  onTap: () {
-                    if (formKey.currentState!.validate()) {
-                      if (passwordController.text != confirmController.text) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Passwords do not match')),
-                        );
-                        return; //
-                      }
+                    onTap: () async {
+                      if (formKey.currentState!.validate()) {
+                        try {
+                          final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
 
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => test()),
-                      );
+                          // ابعت رسالة تأكيد على الإيميل
+                          await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+
+                          // اعرضي رسالة تنبيه للمستخدم
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.success,
+                            animType: AnimType.rightSlide,
+                            title: 'تم إنشاء الحساب',
+                            desc: 'تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. من فضلك قم بتأكيد بريدك ثم قم بتسجيل الدخول.',
+                            btnOkText: "حسناً",
+                            btnOkOnPress: () {
+                              Navigator.of(context).pushReplacementNamed("login");
+                            },
+                          )..show();
+
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'weak-password') {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.info,
+                              animType: AnimType.rightSlide,
+                              title: 'password is week',
+                              desc: 'Please chiose passowrd stronger',
+                              btnOkOnPress: () {},
+                            )..show();
+
+                          } else if (e.code == 'email-already-in-use') {
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.info,
+                              animType: AnimType.rightSlide,
+                              title: 'الإيميل مستخدم مسبقاً',
+                              desc: 'هذا البريد مستخدم بالفعل من قبل حساب آخر.',
+                              btnOkOnPress: () {},
+                            )..show();
+                          }
+                        } catch (e) {
+                          print(e);
+                        }
+                      }
                     }
-                  },
+
                 )
 
 

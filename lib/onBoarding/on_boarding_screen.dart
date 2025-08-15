@@ -19,6 +19,7 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   PageController pageController=PageController(initialPage: 0);
 int currentIndex = 0;
+
 @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,9 +89,7 @@ int currentIndex = 0;
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut);
                     } else {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => FristScreen()));
+                     Navigator.of(context).pushReplacementNamed("frist");
                     }
                   },
                   child: Container(

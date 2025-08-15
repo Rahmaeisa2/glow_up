@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "423841142603",
+    "project_id": "glow-up-dba12",
+    "storage_bucket": "glow-up-dba12.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423841142603:android:5959d54ddeb83a621b3ace",
+        "android_client_info": {
+          "package_name": "com.glow_up_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuDZfs1sSMeXCGysxlmrykOFiNryAPO-g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

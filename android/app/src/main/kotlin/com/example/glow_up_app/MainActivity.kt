@@ -1,4 +1,4 @@
-package com.example.glow_up_app
+package com.glow_up_app
 
 import io.flutter.embedding.android.FlutterActivity
 

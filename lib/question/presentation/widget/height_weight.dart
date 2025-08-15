@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../core/widget/user-answers.dart';
+import '../question_onboarding.dart';
+
 class SliderHeightWeightScreen extends StatefulWidget {
   @override
   _SliderHeightWeightScreenState createState() => _SliderHeightWeightScreenState();
@@ -10,6 +13,10 @@ class SliderHeightWeightScreen extends StatefulWidget {
 class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
   double height = 160;
   double weight = 60;
+  double sliderValue = 5;
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +46,16 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
             SizedBox(height: 8),
             Text("${height.toInt()} cm", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
             Slider(
+              onChangeEnd: (value){
+              },
               min: 100,
               max: 220,
               value: height,
               activeColor:ColorsApp.p,
-              onChanged: (value) {
-                setState(() {
-                  height = value;
-                });
+              onChanged: (v) {
+                setState(() => height = v);
+                UserAnswer.height = v;
+
               },
             ),
             SizedBox(height: 32),
@@ -64,11 +73,11 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
               max: 150,
               value: weight,
               activeColor:ColorsApp.p,
-              onChanged: (value) {
-                setState(() {
-                  weight = value;
-                });
-              },
+              onChanged: (v) {
+                setState(() => weight = v);
+    UserAnswer.weight = v;
+    },
+
             ),
             Spacer(),
 

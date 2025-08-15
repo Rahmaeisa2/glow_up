@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theming/app_color.dart';
+import '../../../core/widget/user-answers.dart';
 class AvailableTime extends StatefulWidget {
   const AvailableTime({super.key});
 
@@ -15,9 +17,32 @@ class _AvailableTimeState extends State<AvailableTime> {
     {"emoji" : " 🕒 " , "title": " 15-30 min "},
     {"emoji" : "⏰ " , "title": "30-60 min "},
     {"emoji" : " 🧭 " , "title": " More than 1 hour "},
-
-
   ];
+  Future<void> saveAnswer() async {
+    if (selectedTime == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("من فضلك اختر إجابة أولاً")),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection('user_answers').add({
+        'question': 'How much time can you give daily?',
+        'answer': selectedTime,
+        'timestamp': FieldValue.serverTimestamp(),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("تم حفظ إجابتك ✅")),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("خطأ أثناء الحفظ: $e")),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,15 +67,14 @@ class _AvailableTimeState extends State<AvailableTime> {
                 height: 42,
               ),
               ...time.map(((time){
+
                 bool isSelected = selectedTime == time["title"];
                 return GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       selectedTime = time["title"];
-
-                    });
-
-                  },
+    UserAnswer.availableTime = time["title"];
+    });},
                   child: Container(
                     margin: EdgeInsets.only(bottom: 16),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -61,8 +85,6 @@ class _AvailableTimeState extends State<AvailableTime> {
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(16),
-
-
                     ),
                     child: Row(
                       children: [
@@ -78,15 +100,11 @@ class _AvailableTimeState extends State<AvailableTime> {
                                   color: ColorsApp.p,
                                   fontSize: 16,
                                   fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,)))
-                      ],
+                      ]
                     ),
-
                   ),
-
                 );
-
       })).toList(),
-
             ],
           ),
         ),
