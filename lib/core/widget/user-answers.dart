@@ -1,6 +1,8 @@
 class UserAnswer {
   static String? name;
   static int? age;
+  static String? email
+  ;
   static String? gender;
   static double? height;
   static double? weight;
@@ -11,6 +13,7 @@ class UserAnswer {
 
     return{
       'name'         : name,
+      'email': email,
       'age'          : age,
       'gender'       : gender,
       'height_cm'    : height,

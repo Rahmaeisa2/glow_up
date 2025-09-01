@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
+import 'package:glow_up_app/core/widget/user-answers.dart';
 import 'package:glow_up_app/question/presentation/question_onboarding.dart';
 import 'package:glow_up_app/test.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,6 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController loginController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
+  final dataToSave =UserAnswer.email;
 
   @override
   Widget build(BuildContext context) {
@@ -73,12 +75,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50
                   ),
                   CustomTextFormField(
+
                       isObscure: _isObscure,
                       onToggle: () {
                         setState(() {
                           _isObscure = !_isObscure;
                         });
-                      },
+                      }, onChanged: (value) {
+                    UserAnswer.email =value;},
                       validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';

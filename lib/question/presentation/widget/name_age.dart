@@ -15,7 +15,6 @@ class _NameAndAgeScreenState extends State<NameAndAgeScreen> {
 
   final TextEditingController ageController = TextEditingController();
 
-  final ValueNotifier<String?> gender = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
