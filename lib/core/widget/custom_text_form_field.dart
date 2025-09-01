@@ -3,7 +3,7 @@ import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final String hintText;
+  final String? hintText;
   final String title;
   final IconData? prefixIcon;
   final IconData?suffixIcon;
@@ -17,7 +17,7 @@ class CustomTextFormField extends StatelessWidget {
 
    CustomTextFormField({
     super.key,
-    required this.hintText,
+     this.hintText,
     required this.title,
     this.prefixIcon,
     required this.controller,

@@ -10,8 +10,10 @@ import 'package:glow_up_app/question/presentation/widget/gender.dart';
 import 'package:glow_up_app/question/presentation/widget/height_weight.dart';
 import 'package:glow_up_app/question/presentation/widget/name_age.dart';
 import 'package:glow_up_app/question/presentation/widget/target_screen.dart';
+import 'package:glow_up_app/test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../core/routes/app_route.dart';
 import '../../core/theming/app_color.dart';
 import '../../core/widget/user-answers.dart';
 import '../../onBoarding/widgets/page_view.dart';
@@ -29,16 +31,17 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m)));
   }
   Future<void> _submitToFirestore() async {
-    print("User Answers: ${UserAnswer.toMap()}"); // نتاكد قبل الرفع
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
       print("❌ No user signed in");
-      _msg("سجّلي الدخول أولاً");
+      _msg("Login first");
       return;
     }
 
     print("✅ User signed in: ${user.uid}");
+
+
 
     final dataToSave = UserAnswer.toMap();
     print("📦 Data to save: $dataToSave");
@@ -48,17 +51,17 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
           .collection('users')
           .doc(user.uid)
           .set({
-        'onboarding': dataToSave,
+        'onboarding': dataToSave, //user data
         'updatedAt': FieldValue.serverTimestamp(),
       }, SetOptions(merge: true));
 
       print("✅ Data saved successfully!");
-      _msg("تم الحفظ ✅");
+      _msg("Saved ✅");
 
 
     } catch (e) {
       print("🔥 Error saving to Firestore: $e");
-      _msg("حصل خطأ أثناء الحفظ: $e");
+      _msg("Error: $e");
     }
   }
   @override
@@ -124,7 +127,7 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
                   );
                 } else {
                   await _submitToFirestore();
-                  Navigator.of(context).pushReplacementNamed("test");
+                  Navigator.pushNamed(context, AppRoutes.navBar);
 
 
                 }

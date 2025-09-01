@@ -9,6 +9,8 @@ import 'package:glow_up_app/register/presentation/register_screen.dart';
 import 'package:glow_up_app/splash/splash_screen.dart';
 import 'package:glow_up_app/test.dart';
 
+import 'core/routes/app_route.dart';
+
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -41,15 +43,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) ? test(): OnBoardingScreen(),
-      routes: {
-        "login" : (context) => LoginScreen(),
-        "register" : (context) => RegisterScreen(),
-        "question" :  (context) => QuestionOnBoarding(),
-        "onboarding": (context) => OnBoardingScreen(),
-        "frist": (context) => FristScreen(),
-        "test": (context) => test(),
-      },
+      home: (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) ? FristScreen(): OnBoardingScreen(),
+      initialRoute: AppRoutes.init,
+      onGenerateRoute: AppRouter.generateRoute,
     );
   }
 }

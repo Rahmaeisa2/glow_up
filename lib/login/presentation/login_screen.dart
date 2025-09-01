@@ -9,6 +9,7 @@ import 'package:glow_up_app/question/presentation/question_onboarding.dart';
 import 'package:glow_up_app/test.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/routes/app_route.dart';
 import '../../core/theming/app_color.dart';
 import '../../register/presentation/register_screen.dart';
 
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                             if (user != null && user.emailVerified) {
                               print("✅ Email verified. Logged in: ${user.email}");
-                              Navigator.of(context).pushReplacementNamed("question");
+                              Navigator.pushNamed(context, AppRoutes.questions);
                             } else {
                               print("⚠️ Email not verified.");
                               await AwesomeDialog(
@@ -240,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           ),),),
                       TextButton(onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
+                        Navigator.pushNamed(context, AppRoutes.register);
                       }
                       , child: Text(
                         "Sing Up",

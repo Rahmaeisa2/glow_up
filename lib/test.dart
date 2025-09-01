@@ -7,9 +7,10 @@ class test extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       appBar:AppBar(leading: InkWell(
         onTap:(){
-          Navigator.pop(context);
+          Navigator.maybePop(context);
         },
         child: Icon(Icons.arrow_back_ios_new_rounded ,
         size: 20,),

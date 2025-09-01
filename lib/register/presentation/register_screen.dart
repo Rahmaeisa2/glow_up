@@ -5,6 +5,7 @@ import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/routes/app_route.dart';
 import '../../core/theming/app_color.dart';
 import '../../test.dart';
 
@@ -140,54 +141,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
                         try {
-                          final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                          final credential = await FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
                             email: emailController.text,
                             password: passwordController.text,
                           );
 
-                          // ابعت رسالة تأكيد على الإيميل
-                          await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+                          await FirebaseAuth.instance.currentUser!
+                              .sendEmailVerification();
 
-                          // اعرضي رسالة تنبيه للمستخدم
                           AwesomeDialog(
                             context: context,
                             dialogType: DialogType.success,
                             animType: AnimType.rightSlide,
-                            title: 'تم إنشاء الحساب',
-                            desc: 'تم إرسال رسالة تأكيد إلى بريدك الإلكتروني. من فضلك قم بتأكيد بريدك ثم قم بتسجيل الدخول.',
-                            btnOkText: "حسناً",
+                            title: 'Account Created',
+                            desc: 'A confirmation email has been sent to your email address. Please confirm your email before logging in.',
+                            btnOkText: "OK",
                             btnOkOnPress: () {
-                              Navigator.of(context).pushReplacementNamed("login");
+                              Navigator.pushNamed(context, AppRoutes.login);
                             },
-                          )..show();
-
+                          )
+                            ..show();
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
                             AwesomeDialog(
                               context: context,
                               dialogType: DialogType.info,
                               animType: AnimType.rightSlide,
-                              title: 'password is week',
-                              desc: 'Please chiose passowrd stronger',
+                              title: 'Weak Password',
+                              desc: 'Please choose a stronger password.',
                               btnOkOnPress: () {},
-                            )..show();
-
+                            )
+                              ..show();
                           } else if (e.code == 'email-already-in-use') {
                             AwesomeDialog(
                               context: context,
                               dialogType: DialogType.info,
                               animType: AnimType.rightSlide,
-                              title: 'الإيميل مستخدم مسبقاً',
-                              desc: 'هذا البريد مستخدم بالفعل من قبل حساب آخر.',
+                              title: 'Email Already in Use',
+                              desc: 'This email is already associated with another account.',
                               btnOkOnPress: () {},
-                            )..show();
+                            )
+                              ..show();
                           }
                         } catch (e) {
                           print(e);
                         }
-                      }
-                    }
-
+                      }}
                 )
 
 

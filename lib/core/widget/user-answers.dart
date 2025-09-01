@@ -21,6 +21,7 @@ class UserAnswer {
     };
 
   }
+
   static void reset() {
     name = null; age = null; gender = null;
     height = null; weight = null;

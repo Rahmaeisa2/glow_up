@@ -9,6 +9,8 @@ import 'package:glow_up_app/onBoarding/widgets/page_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../core/routes/app_route.dart';
+
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({super.key});
 
@@ -89,7 +91,7 @@ int currentIndex = 0;
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut);
                     } else {
-                     Navigator.of(context).pushReplacementNamed("frist");
+                      Navigator.pushNamed(context, AppRoutes.FristScreen);
                     }
                   },
                   child: Container(

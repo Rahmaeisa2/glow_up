@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:glow_up_app/core/widget/user-answers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theming/app_color.dart';
@@ -41,7 +42,7 @@ class _TargetScreenState extends State<TargetScreen> {
               return GestureDetector(
                 onTap: () {
                   setState(() {
-                    selectedTarget = target["title"];
+                    UserAnswer.target = target["title"];
                   });
                 },
                 child: Container(
