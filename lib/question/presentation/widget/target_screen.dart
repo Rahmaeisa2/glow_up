@@ -3,6 +3,7 @@ import 'package:glow_up_app/core/widget/user-answers.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theming/app_color.dart';
+import '../../../core/widget/container_for_question_screen.dart';
 
 class TargetScreen extends StatefulWidget {
   @override
@@ -42,40 +43,14 @@ class _TargetScreenState extends State<TargetScreen> {
               return GestureDetector(
                 onTap: () {
                   setState(() {
+                    selectedTarget = target["title"];
                     UserAnswer.target = target["title"];
                   });
                 },
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 16),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: BoxDecoration(
-                    color: isSelected ? Colors.indigo[100] : Colors.grey[100],
-                    border: Border.all(
-                      color: isSelected ? Colors.indigo : Colors.grey,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        target["emoji"],
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        target["title"],
-
-                        style: GoogleFonts.aDLaMDisplay(
-                          textStyle:  TextStyle(
-                              color: ColorsApp.p,
-                              fontSize: 16,
-                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
-                        ),)
-                      ),
-                    ],
-                  ),
-                ),
+                child:
+                ContainerForQuestionScreen(emoji: target['emoji'], title: target['title'], isSelected: isSelected,
+                  
+                )
               );
             }).toList(),
 

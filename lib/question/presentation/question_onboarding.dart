@@ -1,22 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
-import 'package:glow_up_app/login/presentation/login_screen.dart';
+import 'package:glow_up_app/question/presentation/widget/activty_level.dart';
 import 'package:glow_up_app/question/presentation/widget/available_time.dart';
 import 'package:glow_up_app/question/presentation/widget/gender.dart';
 import 'package:glow_up_app/question/presentation/widget/height_weight.dart';
+import 'package:glow_up_app/question/presentation/widget/levels.dart';
 import 'package:glow_up_app/question/presentation/widget/name_age.dart';
 import 'package:glow_up_app/question/presentation/widget/target_screen.dart';
-import 'package:glow_up_app/test.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../core/routes/app_route.dart';
 import '../../core/theming/app_color.dart';
 import '../../core/widget/user-answers.dart';
-import '../../onBoarding/widgets/page_view.dart';
 class QuestionOnBoarding extends StatefulWidget {
   const QuestionOnBoarding({super.key});
 
@@ -26,6 +22,10 @@ class QuestionOnBoarding extends StatefulWidget {
 class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
   PageController questionController = PageController(initialPage: 0);
   int currentIndex = 0;
+  TextEditingController loginController = TextEditingController();
+
+  User? user = FirebaseAuth.instance.currentUser;
+  late String? email = user?.email;
 
    void _msg(String m) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m)));
@@ -43,17 +43,24 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
 
 
 
-    final dataToSave = UserAnswer.toMap();
+    Map<String, dynamic> dataToSave = UserAnswer.toMap();
+    dataToSave['createdAt'] = FieldValue.serverTimestamp();
+    dataToSave['updatedAt'] = FieldValue.serverTimestamp();
+    dataToSave['userId'] = user.uid;
+
     print("📦 Data to save: $dataToSave");
 
-    try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .set({
-        'onboarding': dataToSave, //user data
-        'updatedAt': FieldValue.serverTimestamp(),
-      }, SetOptions(merge: true));
+    // Save to Firestore
+   try{ await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .set({
+      'onboarding': dataToSave,
+     'activityLevel': UserAnswer.activityLevel,
+
+     'email': user.email,
+      'updatedAt': FieldValue.serverTimestamp(),
+    }, SetOptions(merge: true));
 
       print("✅ Data saved successfully!");
       _msg("Saved ✅");
@@ -82,7 +89,7 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
         ),
         child: Column(
           children: [
-            SmoothPageIndicator(controller: questionController, count: 5 ,
+            SmoothPageIndicator(controller: questionController, count: 6 ,
             axisDirection: Axis.horizontal,
               effect:  WormEffect(
                 dotHeight: 6,
@@ -109,7 +116,8 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
                   GenderSelectionWidget(),
                   SliderHeightWeightScreen(),
                   TargetScreen(),
-                  AvailableTime()
+                  AvailableTime(),
+                  ActivityLevelWidget(),
                 ],
               ),
             ),
@@ -117,10 +125,10 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
               height: 15,
             ),
             CustomButton(
-              name: currentIndex == 4 ? "Finish" : "Next",
+              name: currentIndex == 5 ? "Finish" : "Next",
               background: ColorsApp.p,
               onTap: () async {
-                if (currentIndex < 4) {
+                if (currentIndex < 5) {
                   questionController.nextPage(
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeInOut,
@@ -128,8 +136,6 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
                 } else {
                   await _submitToFirestore();
                   Navigator.pushNamed(context, AppRoutes.navBar);
-
-
                 }
               },
             )

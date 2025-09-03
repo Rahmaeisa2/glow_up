@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:glow_up_app/core/widget/container_for_question_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/theming/app_color.dart';
@@ -73,37 +74,10 @@ class _AvailableTimeState extends State<AvailableTime> {
                 return GestureDetector(
                   onTap: () {
                     setState(() {
-                      selectedTime = time["title"];
-    UserAnswer.availableTime = time["title"];
+                      selectedTime = time["title"]; //for screen
+    UserAnswer.availableTime = time["title"]; //for model
     });},
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 16),
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                    decoration: BoxDecoration(
-                      color: isSelected ? Colors.indigo[100] : Colors.grey[100],
-                        border: Border.all(
-                          color: isSelected ? Colors.indigo : Colors.grey,
-                          width: 2,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Row(
-                      children: [
-                        Text(time["emoji"],
-                          style: TextStyle(fontSize: 24),
-                        ),
-                        SizedBox(
-                          width: 9,
-                        ),
-                        Text(time["title"],
-                            style: GoogleFonts.aDLaMDisplay(
-                                textStyle:  TextStyle(
-                                  color: ColorsApp.p,
-                                  fontSize: 16,
-                                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,)))
-                      ]
-                    ),
-                  ),
+                  child: ContainerForQuestionScreen(emoji: time['emoji'],title:time['title'], isSelected: isSelected,)
                 );
       })).toList(),
             ],

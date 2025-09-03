@@ -23,12 +23,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   TextEditingController loginController = TextEditingController();
 
+  User? user = FirebaseAuth.instance.currentUser;
+  late String? email = user?.email;
   //get current user
   late TextEditingController _nameController =TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance; // (prepare)data for current user
   final String userId = FirebaseAuth.instance.currentUser!.uid;
-  User? user = FirebaseAuth.instance.currentUser;
-  late String? email = user?.email;
+
   bool loading=false;
 
   XFile? image;
@@ -257,6 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
            ),
             SizedBox(height: 30,),
             CustomButton(
+              background: ColorsApp.p,
                 name: "Logout", onTap: (){
               logout();
               Navigator.pushNamed(context, AppRoutes.login);
