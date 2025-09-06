@@ -6,11 +6,15 @@ import 'package:glow_up_app/login/presentation/login_screen.dart';
 import 'package:glow_up_app/register/presentation/register_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'core/widget/responsive.dart';
+
 class FristScreen extends StatelessWidget {
   const FristScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+
     return Scaffold(
       appBar: AppBar(
        // elevation: 1,

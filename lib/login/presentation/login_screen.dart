@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/routes/app_route.dart';
 import '../../core/theming/app_color.dart';
+import '../../core/widget/responsive.dart';
 import '../../register/presentation/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -35,6 +36,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

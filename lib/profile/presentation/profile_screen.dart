@@ -7,9 +7,11 @@ import 'package:glow_up_app/core/routes/app_route.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
-import 'package:glow_up_app/profile/firestore_services.dart';
+import 'package:glow_up_app/core/services/firestore_services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../core/widget/responsive.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -91,9 +93,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     user = _auth.currentUser!;
     _nameController = TextEditingController();
+
   }
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Profiler",style: TextStyle(
@@ -184,8 +189,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text(userData['name'] ?? "No Name",
-                    style:  GoogleFonts.aDLaMDisplay(
+                  Text(userData['onboarding']?['name'] ?? '',
+
+              style:  GoogleFonts.aDLaMDisplay(
                       textStyle:  TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w400,),

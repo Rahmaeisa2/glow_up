@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/routes/app_route.dart';
 import '../../core/theming/app_color.dart';
+import '../../core/widget/responsive.dart';
 import '../../test.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -27,6 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(

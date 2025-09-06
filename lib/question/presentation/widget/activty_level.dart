@@ -15,7 +15,7 @@ class ActivityLevelWidget extends StatefulWidget {
 }
 
 class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
-  int _selectedActivityLevelIndex = 0;
+  int _selectedActivityLevelIndex = -1;
   bool _isLoading = false;
 
   @override
@@ -25,20 +25,19 @@ class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
     _loadPreviousSelection();
   }
 
-  void _updateActivityLevel(int index) {
+  void _updateActivityLevel (index){
     ActivityLevel selectedLevel = ActivityLevelHelper.getActivityLevelFromIndex(index);
-
-    // Update UserAnswer with activity level value
     UserAnswer.activityLevel = selectedLevel.toMap();
 
-    print('✅ Activity Level Updated:');
-    print('  - Name: ${selectedLevel.name}');
-    print('  - Display: ${selectedLevel.displayName}');
-    print('  - Multiplier: ${selectedLevel.multiplier}');
-    print('  - UserAnswer.activityLevel: ${UserAnswer.activityLevel}');
+print("Activity Level Updated:");
+print("Name : ${selectedLevel.name}");
+    print("Name : ${selectedLevel.displayName}");
+    print("Name : ${selectedLevel.multiplier}");
+    print("UserAnswer.activityLevel :${UserAnswer.activityLevel}");
+
   }
   void _loadPreviousSelection() {
-    // إذا كان فيه activity level محفوظ مسبقاً في UserAnswer
+    // إذا كان فيه activity level قديم في UserAnswer
     if (UserAnswer.activityLevel != null) {
       String savedActivityName = UserAnswer.activityLevel!['name'];
       int savedIndex = ActivityLevel.values.indexWhere(
@@ -62,16 +61,7 @@ class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
           padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 20),
           child: Column(
             children: [
-            // Progress indicator (optional)
-            LinearProgressIndicator(
-            value: 0.8, // Adjust based on your progress
-            backgroundColor: Colors.grey[300],
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.black12),
-          ),
-          SizedBox(height: 30),
-
-          // Title and description
-          Text(
+              Text(
             'What is your daily activity level?',
             style: GoogleFonts.cairo(
               fontSize: 24,
@@ -107,7 +97,7 @@ class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
                       title: Text(
                         level.displayName,
                         style: GoogleFonts.cairo(
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                           color: isSelected ? ColorsApp.p : Colors.black87,
                         ),
@@ -116,13 +106,7 @@ class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: 4),
-                          Text(
-                            'معامل النشاط: ${level.multiplier}',
-                            style: GoogleFonts.cairo(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
-                          ),
+
                         ],
                       ),
                       value: index,

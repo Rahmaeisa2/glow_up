@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../core/routes/app_route.dart';
+import '../core/widget/responsive.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({super.key});
@@ -24,7 +25,8 @@ int currentIndex = 0;
 
 @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  SizeConfig.init(context);
+  return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 17,

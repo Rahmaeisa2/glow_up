@@ -6,12 +6,13 @@ import 'package:glow_up_app/question/presentation/widget/activty_level.dart';
 import 'package:glow_up_app/question/presentation/widget/available_time.dart';
 import 'package:glow_up_app/question/presentation/widget/gender.dart';
 import 'package:glow_up_app/question/presentation/widget/height_weight.dart';
-import 'package:glow_up_app/question/presentation/widget/levels.dart';
 import 'package:glow_up_app/question/presentation/widget/name_age.dart';
 import 'package:glow_up_app/question/presentation/widget/target_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../core/routes/app_route.dart';
+import '../../core/services/calories_sevices.dart';
 import '../../core/theming/app_color.dart';
+import '../../core/widget/responsive.dart';
 import '../../core/widget/user-answers.dart';
 class QuestionOnBoarding extends StatefulWidget {
   const QuestionOnBoarding({super.key});
@@ -26,8 +27,10 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
 
   User? user = FirebaseAuth.instance.currentUser;
   late String? email = user?.email;
+  bool _isLoading = false;
 
-   void _msg(String m) {
+
+  void _msg(String m) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m)));
   }
   Future<void> _submitToFirestore() async {
@@ -39,14 +42,14 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
       return;
     }
 
+
     print("✅ User signed in: ${user.uid}");
-
-
 
     Map<String, dynamic> dataToSave = UserAnswer.toMap();
     dataToSave['createdAt'] = FieldValue.serverTimestamp();
     dataToSave['updatedAt'] = FieldValue.serverTimestamp();
     dataToSave['userId'] = user.uid;
+    Map<String, dynamic>? nutritionPlan = CalorieCalculatorService.calculateFromUserAnswer();
 
     print("📦 Data to save: $dataToSave");
 
@@ -56,11 +59,10 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
         .doc(user.uid)
         .set({
       'onboarding': dataToSave,
-     'activityLevel': UserAnswer.activityLevel,
-
+     'nutritionPlan':nutritionPlan,
      'email': user.email,
       'updatedAt': FieldValue.serverTimestamp(),
-    }, SetOptions(merge: true));
+    }, SetOptions(merge: true)); //update old data
 
       print("✅ Data saved successfully!");
       _msg("Saved ✅");
@@ -71,8 +73,27 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
       _msg("Error: $e");
     }
   }
+  //for check it done or nor
+   _printNutritionPlan()async {
+    var nutritionPlan = CalorieCalculatorService.calculateFromUserAnswer();
+
+    if (nutritionPlan != null) {
+      print("✅ Nutrition Plan:");
+      print("Calories: ${nutritionPlan['totalCalories']}");
+      print("Protein: ${nutritionPlan['protein']} g");
+      print("Carbs: ${nutritionPlan['carbs']} g");
+      print("Fats: ${nutritionPlan['fats']} g");
+      print("BMR: ${nutritionPlan['bmr']}");
+      print("TDEE: ${nutritionPlan['tdee']}");
+    } else {
+      print("❌ Missing user data");
+    }
+  }
+
   @override
+
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(appBar: AppBar(
       leading: InkWell(
         onTap: (){
@@ -125,18 +146,41 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
               height: 15,
             ),
             CustomButton(
-              name: currentIndex == 5 ? "Finish" : "Next",
+              name:_isLoading ? "Saving data...." :
+              currentIndex == 5 ? "Finish" : "Next",
               background: ColorsApp.p,
               onTap: () async {
+                 if(_isLoading) return;
                 if (currentIndex < 5) {
                   questionController.nextPage(
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeInOut,
                   );
                 } else {
-                  await _submitToFirestore();
-                  Navigator.pushNamed(context, AppRoutes.navBar);
-                }
+                 setState(() {
+                   _isLoading=true;
+                 });
+                 try{
+                   await _submitToFirestore();
+                   await _printNutritionPlan();
+                   Navigator.pushNamed(context, AppRoutes.navBar);
+
+                 }finally{
+                   setState(() {
+                     _isLoading=false;
+                   });
+
+                 }
+                } child: _isLoading
+                     ? const SizedBox(
+                   height: 24,
+                   width: 24,
+                   child: CircularProgressIndicator(
+                     color: Colors.white,
+                     strokeWidth: 2,
+                   ),
+                 )
+                     : null;
               },
             )
           ],
@@ -144,4 +188,5 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
       ),
     );
   }
+
 }
