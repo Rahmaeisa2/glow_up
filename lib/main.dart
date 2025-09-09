@@ -41,11 +41,11 @@ class _MyAppState extends State<MyApp> {
     });    super.initState();
   }
   Widget build(BuildContext context) {
-    return MaterialApp(
+          return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: (FirebaseAuth.instance.currentUser != null && FirebaseAuth.instance.currentUser!.emailVerified) ? FristScreen(): OnBoardingScreen(),
       initialRoute: AppRoutes.init,
-      onGenerateRoute: AppRouter.generateRoute,
+      onGenerateRoute: AppRouter.generateRoute, 
     );
   }
 }

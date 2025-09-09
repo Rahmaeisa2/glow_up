@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       body:  Padding(
         padding: const EdgeInsets.symmetric(
-            horizontal: 23,
+            horizontal: 21,
             vertical: 70
         ),
         child: Form(
@@ -95,6 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: "Email", title: "Email", controller: loginController),
                   const SizedBox(height: 17,),
                   CustomTextFormField(
+                    isPassword: true,
                       isObscure: _isObscure,
                       onToggle: () {
                         setState(() {
@@ -105,9 +106,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     validator: (value) {
                     if (value == null || value.isEmpty) {
                     return 'Please enter your email';
-                    }else if (value.length <8){
-                      return "password must be 8 char";
-
                     }
                 } ,
                       hintText: "Password", title: "Password", controller: passwordController),
@@ -212,12 +210,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         }),
                         Text("Remember me?",style: GoogleFonts.alexandria(
                           textStyle: TextStyle(
-                            fontSize: 16,
+                            fontSize: 13,
                             fontWeight: FontWeight.w600,
 
                           ),),),
                         SizedBox(
-                          width: 15,
+                          width: 7,
                         ),
                         TextButton(onPressed: ()async{
                           await FirebaseAuth.instance.sendPasswordResetEmail(email: loginController.text.trim());
@@ -226,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Forget Password?" ,
                         style: GoogleFonts.alexandria(
                           textStyle: TextStyle(
-                            fontSize: 16,
+                            fontSize: 13,
                             fontWeight: FontWeight.w600,
 
                           ),),
@@ -234,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   SizedBox(
-                    height: 12,
+                    height: 6,
                   ),
                   Row(
 
@@ -243,7 +241,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text("Already have an account?",
                         style: GoogleFonts.alexandria(
                           textStyle: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.w600,
 
                           ),),),
@@ -254,7 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Sing Up",
                           style: GoogleFonts.alexandria(
                             textStyle: TextStyle(
-                              fontSize: 18,
+                              fontSize: 15,
                               fontWeight: FontWeight.w600,
 
                             ),),))

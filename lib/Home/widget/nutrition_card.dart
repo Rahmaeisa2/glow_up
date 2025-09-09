@@ -31,7 +31,7 @@ class _NutritionCardState extends State<NutritionCard> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.indigo,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(14),
           boxShadow: [
             BoxShadow(
               color: Colors.black26,
@@ -45,9 +45,9 @@ class _NutritionCardState extends State<NutritionCard> {
           children: [
             // Icon
             CircleAvatar(
-              radius: 28,
+              radius: 22,
               backgroundColor: Colors.white,
-              child: Icon(widget.icon, size: 28, color: Colors.indigo),
+              child: Icon(widget.icon, size: 18, color: Colors.indigo),
             ),
             const SizedBox(width: 16),
 
@@ -59,7 +59,7 @@ class _NutritionCardState extends State<NutritionCard> {
                   Text(
                     widget.title,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.white70,
                     ),
@@ -68,7 +68,7 @@ class _NutritionCardState extends State<NutritionCard> {
                   Text(
                     widget.value,
                     style: const TextStyle(
-                      fontSize: 22,
+                      fontSize: 18,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),

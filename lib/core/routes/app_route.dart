@@ -2,6 +2,7 @@ import 'package:glow_up_app/frist_screen.dart';
 import 'package:glow_up_app/login/presentation/login_screen.dart';
 import 'package:glow_up_app/question/presentation/question_onboarding.dart';
 import 'package:glow_up_app/register/presentation/register_screen.dart';
+import 'package:glow_up_app/search/presentation/search_screen.dart';
 import 'package:glow_up_app/test.dart';
 
 import '../../bottom_nav_bar/bottom_nav_bar.dart';
@@ -18,6 +19,8 @@ class AppRoutes {
   static const String login = '/loginScreen';
   static const String register = '/register';
   static const String navBar = '/NavBar';
+  static const String search = '/search';
+
 
 
 
@@ -43,6 +46,8 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) =>  RegisterScreen());
       case AppRoutes.navBar:
         return MaterialPageRoute(builder: (_) =>  BottomNavBarScreen());
+      case AppRoutes.search:
+        return MaterialPageRoute(builder: (_) =>  SearchScreen());
 
     default:
     return MaterialPageRoute(

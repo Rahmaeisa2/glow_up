@@ -251,7 +251,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               maxLines: 3,
               style: GoogleFonts.aDLaMDisplay(
                 textStyle:  TextStyle(
-                  fontSize: 24,
+                  fontSize: 22,
                   fontWeight: FontWeight.w400,),
               ),),
            SizedBox(height: 23,),

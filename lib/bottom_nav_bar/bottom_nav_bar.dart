@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/Home/home_screen.dart';
 import 'package:glow_up_app/bottom_nav_bar/widget/nav_bar_icon.dart';
+import 'package:glow_up_app/core/routes/app_route.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/search/presentation/search_screen.dart';
 import '../profile/presentation/profile_screen.dart';
@@ -38,9 +39,14 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
         },
         shape: CircleBorder(),
         backgroundColor: Colors.white,
-        child: Icon(
-          Icons.search,
-          color: _currentIndex == 2 ? ColorsApp.p : Colors.black,
+        child: InkWell(
+          onTap: (){
+            Navigator.pushNamed(context,AppRoutes.search);
+          },
+          child: Icon(
+            Icons.search,
+            color: _currentIndex == 2 ? ColorsApp.p : Colors.black,
+          ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

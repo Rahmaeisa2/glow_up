@@ -74,7 +74,7 @@ bool? isMale =null;
                         Text("Male", style: GoogleFonts.aDLaMDisplay(
                         textStyle: const TextStyle(
                         color: ColorsApp.p,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.w400
                         ),
                   )),
@@ -113,7 +113,7 @@ bool? isMale =null;
                         Text("Female",  style: GoogleFonts.aDLaMDisplay(
                           textStyle: const TextStyle(
                               color: ColorsApp.p,
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.w400
                           ),
                         )),

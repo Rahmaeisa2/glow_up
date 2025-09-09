@@ -21,24 +21,26 @@ class _NameAndAgeScreenState extends State<NameAndAgeScreen> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30,
           vertical: 50),
-      child: Column(
-        children: [
-          CustomTextFormField
-            (
-              onChanged: (v) {
-                UserAnswer.name = v;
-              },
-              hintText: "Enter your name", title: "Name", controller: nameController),
-          SizedBox(height: 30),
-      CustomTextFormField(
-
-          onChanged:(v){
-            final n = int.tryParse(v);
-            if(n !=null )UserAnswer.age=n;
-
-      }
-          ,hintText: "Enter your age", title: "Age", controller: ageController)
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            CustomTextFormField
+              (
+                onChanged: (v) {
+                  UserAnswer.name = v;
+                },
+                hintText: "Enter your name", title: "Name", controller: nameController),
+            SizedBox(height: 30),
+        CustomTextFormField(
+        
+            onChanged:(v){
+              final n = int.tryParse(v);
+              if(n !=null )UserAnswer.age=n;
+        
+        }
+            ,hintText: "Enter your age", title: "Age", controller: ageController)
+          ],
+        ),
       ),
     );
   }
