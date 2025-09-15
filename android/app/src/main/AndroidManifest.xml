@@ -2,7 +2,7 @@
     
 
     <application
-        android:label="glow_up_app"
+        android:label="Glow up"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -1,13 +1,16 @@
-import 'package:glow_up_app/frist_screen.dart';
-import 'package:glow_up_app/login/presentation/login_screen.dart';
-import 'package:glow_up_app/question/presentation/question_onboarding.dart';
-import 'package:glow_up_app/register/presentation/register_screen.dart';
-import 'package:glow_up_app/search/presentation/search_screen.dart';
-import 'package:glow_up_app/test.dart';
+import 'package:glow_up_app/Nutrition/presentation/recipre_details_screen.dart';
+import 'package:glow_up_app/features/frist_screen.dart';
 
-import '../../bottom_nav_bar/bottom_nav_bar.dart';
-import '../../onBoarding/on_boarding_screen.dart';
-import '../../splash/splash_screen.dart';
+
+import '../../Nutrition/Data/recipe_model.dart';
+import '../../features/bottom_nav_bar/bottom_nav_bar.dart';
+import '../../features/login/presentation/login_screen.dart';
+import '../../features/onBoarding/on_boarding_screen.dart';
+import '../../features/question/presentation/question_onboarding.dart';
+import '../../features/register/presentation/register_screen.dart';
+import '../../features/search/presentation/search_screen.dart';
+import '../../features/splash/splash_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -20,6 +23,7 @@ class AppRoutes {
   static const String register = '/register';
   static const String navBar = '/NavBar';
   static const String search = '/search';
+    static const String recipeDetails = '/recipreDetail';
 
 
 
@@ -48,6 +52,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) =>  BottomNavBarScreen());
       case AppRoutes.search:
         return MaterialPageRoute(builder: (_) =>  SearchScreen());
+      case AppRoutes.recipeDetails:
+         final recipe = settings.arguments as RecipeModel;
+        return MaterialPageRoute(builder: (_) =>  RecipreDetailsScreen(recipe: recipe,));
 
     default:
     return MaterialPageRoute(

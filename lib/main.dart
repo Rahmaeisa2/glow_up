@@ -1,15 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:glow_up_app/frist_screen.dart';
-import 'package:glow_up_app/login/presentation/login_screen.dart';
-import 'package:glow_up_app/onBoarding/on_boarding_screen.dart';
-import 'package:glow_up_app/question/presentation/question_onboarding.dart';
-import 'package:glow_up_app/register/presentation/register_screen.dart';
-import 'package:glow_up_app/splash/splash_screen.dart';
+import 'package:glow_up_app/features/frist_screen.dart';
+
 import 'package:glow_up_app/test.dart';
 
 import 'core/routes/app_route.dart';
+import 'features/onBoarding/on_boarding_screen.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   void initState() {
+
     FirebaseAuth.instance
         .authStateChanges()
         .listen((User? user) {
