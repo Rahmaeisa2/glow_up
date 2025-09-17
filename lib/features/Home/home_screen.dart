@@ -1,14 +1,13 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:glow_up_app/Nutrition/Data/recipe_model.dart';
 import 'package:glow_up_app/core/services/firestore_services.dart';
 import 'package:glow_up_app/features/Home/widget/nutrition_card.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../Nutrition/presentation/recipre_details_screen.dart';
-import '../../Nutrition/widget/recipe_card.dart';
 import '../../core/widget/responsive.dart';
+import '../Nutrition/model/recipe_model.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final String userId = FirebaseAuth.instance.currentUser!.uid;
   final FirestoreService firestoreServices = FirestoreService();
 
-  bool isLoading = true;
+
 
 
   @override
@@ -32,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
     user = _auth.currentUser!;
 
   }
-
 
 
   @override
@@ -55,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: FutureBuilder<Map<String, dynamic>?>(
         future: firestoreServices.getUserData(userId),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting || isLoading) {
+          if (snapshot.connectionState == ConnectionState.waiting ) {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.hasError) {
@@ -68,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
           final userData = snapshot.data!;
           final plan = Map<String, dynamic>.from(userData['nutritionPlan'] ?? {});
           print("🔥 Plan Data: $plan");
+
+
 
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 27, vertical: 20),
@@ -138,17 +138,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   const SizedBox(height: 12),
 
-                  // 🍴 Recommendations
-                  Text(
-                    "Recommended Meals",
-                    style: GoogleFonts.aDLaMDisplay(
-                      textStyle: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
+
+
 
                 ],
               ),
@@ -159,3 +150,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+

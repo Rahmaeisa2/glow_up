@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:glow_up_app/Nutrition/widget/clipper.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../Data/recipe_model.dart';
+import '../model/recipe_model.dart';
+import '../widget/clipper.dart';
 
 
 class RecipreDetailsScreen extends StatelessWidget {

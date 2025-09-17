@@ -1,8 +1,12 @@
-import 'package:glow_up_app/Nutrition/presentation/recipre_details_screen.dart';
 import 'package:glow_up_app/features/frist_screen.dart';
+import 'package:glow_up_app/features/muscles/model/muscles_model.dart';
+import 'package:glow_up_app/features/muscles/presentation/muscles_screen.dart';
+import 'package:glow_up_app/features/workout/model/workout_model.dart';
+import 'package:glow_up_app/features/workout/presentation/workout_screen.dart';
 
 
-import '../../Nutrition/Data/recipe_model.dart';
+import '../../features/Nutrition/model/recipe_model.dart';
+import '../../features/Nutrition/presentation/recipre_details_screen.dart';
 import '../../features/bottom_nav_bar/bottom_nav_bar.dart';
 import '../../features/login/presentation/login_screen.dart';
 import '../../features/onBoarding/on_boarding_screen.dart';
@@ -24,6 +28,10 @@ class AppRoutes {
   static const String navBar = '/NavBar';
   static const String search = '/search';
     static const String recipeDetails = '/recipreDetail';
+  static const String muscles = '/muscles';
+  static const String workout = '/workout';
+
+
 
 
 
@@ -55,6 +63,12 @@ class AppRouter {
       case AppRoutes.recipeDetails:
          final recipe = settings.arguments as RecipeModel;
         return MaterialPageRoute(builder: (_) =>  RecipreDetailsScreen(recipe: recipe,));
+      case AppRoutes.muscles:
+        return MaterialPageRoute(builder: (_) => MusclesScreen());
+      case AppRoutes.workout:
+        final muscle = settings.arguments as String;
+
+        return MaterialPageRoute(builder: (_) => WorkoutScreen(muscle:muscle ));
 
     default:
     return MaterialPageRoute(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:glow_up_app/Nutrition/presentation/nutrition_screen.dart';
 
 import 'package:glow_up_app/core/routes/app_route.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/features/bottom_nav_bar/widget/nav_bar_icon.dart';
+import 'package:glow_up_app/features/muscles/presentation/muscles_screen.dart';
+import 'package:glow_up_app/features/workout/presentation/workout_screen.dart';
 import '../Home/home_screen.dart';
+import '../Nutrition/presentation/nutrition_screen.dart';
 import '../profile/presentation/profile_screen.dart';
 import '../search/presentation/search_screen.dart';
 
-// اعمل import للشاشات التانية اللي ناقصة زي Books و MyCart
 
 class BottomNavBarScreen extends StatefulWidget {
   const BottomNavBarScreen({super.key});
@@ -22,7 +23,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
 
   final List<Widget> _screens = [
     HomeScreen(),      // index 0
-    HomeScreen(),     // index 1
+    MusclesScreen(),     // index 1
     SearchScreen(),    // index 2
     NutrituonScreen(),    // index 3
     ProfileScreen(),   // index 4

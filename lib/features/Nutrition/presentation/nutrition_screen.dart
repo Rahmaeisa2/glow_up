@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import 'package:glow_up_app/Nutrition/widget/recipe_card.dart';
 import 'package:glow_up_app/core/routes/app_route.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/services/recipe_service.dart';
-import 'package:glow_up_app/Nutrition/Data/recipe_model.dart';
+import '../../../core/services/recipe_service.dart';
 
+
+import '../model/recipe_model.dart';
 import '../Data/recipre.dart';
+import '../widget/recipe_card.dart';
 class NutrituonScreen extends StatefulWidget {
   const NutrituonScreen({super.key});
 
@@ -93,17 +93,18 @@ class _NutrituonScreenState extends State<NutrituonScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading:false,
         title: Text('Nutrition' ,
           style: GoogleFonts.aDLaMDisplay(
             textStyle:  TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.w400,),),
+        ),
+
       ),
-        centerTitle: true,
-        elevation: 0,
-    ),
     body: Column(
       children: [
+
         TabBar(
           controller: _tabController,
           tabs: mealsTab.map((tab) => Tab(text: tab)).toList(),

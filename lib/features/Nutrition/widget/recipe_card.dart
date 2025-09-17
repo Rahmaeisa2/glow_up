@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:glow_up_app/features/workout/model/workout_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../Data/recipe_model.dart';
+import '../model/recipe_model.dart';
 
 class RecipeCard extends StatelessWidget {
   final RecipeModel recipe;
   final VoidCallback onTap;
-   RecipeCard({super.key, required this.recipe, required this.onTap});
+   RecipeCard({super.key, required this.recipe, required this.onTap, });
 
   @override
   Widget build(BuildContext context) {
