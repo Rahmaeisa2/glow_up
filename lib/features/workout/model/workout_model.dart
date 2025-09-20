@@ -4,8 +4,8 @@ class WorkoutModel {
   final String muscle;
   final String imageUrl;
   final String description;
-  final int sets;
-  final int reps;
+  final String reps;
+  final String sets;
   final int calories;
   final int duration;
 
@@ -28,8 +28,8 @@ class WorkoutModel {
       muscle: data['muscle'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       description: data['description'] ?? '',
-      sets: data['sets'] ?? 0,
-      reps: data['reps'] ?? 0,
+      reps: data['reps']?.toString() ?? '',
+      sets: data['sets']?.toString() ?? '',
       calories: data['calories'] ?? 0,
       duration: data['duration'] ?? 0,
     );

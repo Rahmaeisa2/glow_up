@@ -11,9 +11,7 @@ class WorkoutService {
         await _workoutCollection.doc(workout['id']).set(workout);
         print("workout added : ${workout['name']}");
       }
-      else{
-        print("workout ${workout['name']} is exist");
-      }
+
     } catch (e) {
       print("Failed to add recipe: $e");
     }

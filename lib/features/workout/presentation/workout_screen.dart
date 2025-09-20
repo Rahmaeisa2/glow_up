@@ -7,8 +7,8 @@ import '../model/workout_model.dart';
 import '../widget/workout_card.dart';
 import 'package:flutter/material.dart';
 class WorkoutScreen extends StatefulWidget {
-  final String muscle;
-  const WorkoutScreen({super.key, required this.muscle});
+  final String muscleName;
+  const WorkoutScreen({super.key, required this.muscleName});
 
   @override
   State<WorkoutScreen> createState() => _WorkoutScreenState();
@@ -33,13 +33,13 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
           child: Icon(Icons.arrow_back_ios_new_outlined,
           size: 24,),
         ),
-        title: Text("Workout",style: GoogleFonts.aDLaMDisplay(
+        title: Text(widget.muscleName,style: GoogleFonts.aDLaMDisplay(
         textStyle: const TextStyle(fontSize: 20),)),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('workout')
-            .where('muscle', isEqualTo: widget.muscle)
+            .where('muscle', isEqualTo: widget.muscleName)
             // خدي من widget
             .snapshots(),
         builder: (context, snapshot) {
@@ -52,11 +52,14 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
           if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
             return const Center(child: Text("No workouts found"));
           }
+          print("Docs: ${snapshot.data!.docs.map((d) => d.data())}");
+
 
           List<WorkoutModel> workouts = snapshot.data!.docs
               .map((doc) => WorkoutModel.fromMap(
               doc.data() as Map<String, dynamic>, doc.id))
               .toList();
+
 
           return GridView.builder(
             padding: const EdgeInsets.all(8),

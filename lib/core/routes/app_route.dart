@@ -66,9 +66,9 @@ class AppRouter {
       case AppRoutes.muscles:
         return MaterialPageRoute(builder: (_) => MusclesScreen());
       case AppRoutes.workout:
-        final muscle = settings.arguments as String;
+        final muscleName  = settings.arguments as String;
 
-        return MaterialPageRoute(builder: (_) => WorkoutScreen(muscle:muscle ));
+        return MaterialPageRoute(builder: (_) => WorkoutScreen( muscleName: muscleName ));
 
     default:
     return MaterialPageRoute(
