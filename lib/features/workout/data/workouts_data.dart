@@ -1,200 +1,161 @@
 List<Map<String ,dynamic>> Workouts =[
 
+
+    {
+      "id": "chest_1",
+      "name": "Push Ups",
+      "muscle": "Chest",
+      "sets": 3,
+      "reps": 12,
+      'description':'Place your hands on the floor slightly wider than shoulder-width apart'
+'Keep your body straight from head to heels (like a plank)'
+'Lower your chest toward the ground by bending your elbows at about a 45° angle' ,
+      "type": "Bodyweight",
+      'target':'gain_muscle',
+      "imageUrl": "https://i.pinimg.com/736x/0a/f2/35/0af23570c1c2d8985ef53d42c60fe880.jpg"
+    },
+    {
+      "id": "chest_2",
+      "name": "Incline Push Ups",
+      "muscle": "Chest",
+      "sets": 3,
+      "reps": 12,
+      "type": "Bodyweight",
+      "imageUrl": "https://i.pinimg.com/736x/e0/92/6e/e0926e27a858be396909c0a599b1b98d.jpg"
+    },
+
+    {
+      "id": "chest_4",
+      "name": "Flat Bench Press",
+      "muscle": "Chest",
+      "sets": 4,
+      "reps": 8,
+      "type": "Strength",
+      "imageUrl": "https://i.pinimg.com/736x/b3/37/e0/b337e036cf3b0fa31dab49b904797a6a.jpg"
+    },
+    {
+      "id": "chest_5",
+      "name": "Incline Bench Press",
+      "muscle": "Chest",
+      "sets": 4,
+      "reps": 8,
+      "type": "Strength",
+      "imageUrl": "https://i.pinimg.com/1200x/66/bf/8b/66bf8b4f8c7cece5626e6d653780f1b6.jpg"
+    },
+    {
+      "id": "chest_6",
+      "name": "Decline Bench Press",
+      "muscle": "Chest",
+      "sets": 4,
+      "reps": 8,
+      "type": "Strength",
+      "imageUrl": "https://i.pinimg.com/736x/ce/21/01/ce21011cc29cd4fb0dae527d48284d79.jpg"
+    },
+
   {
-    "id": "chest_1",
-    "muscle": "Chest",
-    "name": "Push Ups",
-    "imageUrl": "https://i.pinimg.com/736x/84/87/27/8487273a12d7f3aee7fa7056f037182a.jpg",
+    "id": "legs_1",
+    "muscle": "Legs",
+    "name": "Bulgarian Split Squat",
+    "imageUrl": "https://i.pinimg.com/736x/62/be/9c/62be9c4114f0ebb6381e8f51b7f0049c.jpg",
+    "sets": 3,
+    "reps": 10,
+    "type": "Strength"
+  },
+  {
+    "id": "legs_2",
+    "muscle": "Legs",
+    "name": "Step Ups",
+    "imageUrl": "https://i.pinimg.com/1200x/b6/ff/1f/b6ff1fe2adfa7f61f217cc374ca79432.jpg",
     "sets": 3,
     "reps": 12,
     "type": "Bodyweight"
   },
   {
-    "id": "chest_2",
-    "muscle": "Chest",
-    "name": "Incline Push Ups",
-    "imageUrl": "https://i.pinimg.com/736x/d7/55/fd/d755fdc403c10e775dd6a6d88cccfbaa.jpg",
+    "id": "legs_3",
+    "muscle": "Legs",
+    "name": "Calf Raises",
+    "imageUrl": "https://i.pinimg.com/736x/55/95/05/5595059fd78cacc43ff2a0bb34553efc.jpg",
+    "sets": 4,
+    "reps": 15,
+    "type": "Strength"
+  },
+
+    {
+      "id": "legs_7",
+      "name": "Squats",
+      "muscle": "Legs",
+      "sets": 4,
+      "reps": 12,
+      "type": "Strength",
+      "imageUrl": "https://i.pinimg.com/736x/38/43/25/384325c7163d73613ebfb8680fa7e5ae.jpg"
+    },
+    {
+      "id": "legs_8",
+      "name": "Lunges",
+      "muscle": "Legs",
+      "sets": 3,
+      "reps": 12,
+      "type": "Strength",
+      "imageUrl": "https://i.pinimg.com/736x/39/f2/d0/39f2d0df7ae1a75e44c8dc560d512d6d.jpg"
+    },
+
+    {
+      "id": "legs_12",
+      "name": "Glute Bridge",
+      "muscle": "Legs",
+      "sets": 3,
+      "reps": 15,
+      "type": "Bodyweight",
+      "imageUrl": "https://i.pinimg.com/1200x/63/0f/fe/630ffe9533420061b55c699e244fa89e.jpg"
+    }
+  ,
+
+  {
+    "id": "back_1",
+    "muscle": "Back",
+    "name": "Pull Ups",
+    "imageUrl": "https://i.pinimg.com/736x/34/65/3a/34653af25b5b0993fd504ecba9cf4a32.jpg",
     "sets": 3,
+    "reps": 8,
+    "type": "Strength"
+  },
+
+  {
+    "id": "back_2",
+    "muscle": "Back",
+    "name": "Deadlift",
+    "imageUrl": "https://i.pinimg.com/736x/8d/54/e6/8d54e6dee514cf11f5ce95590b3c3953.jpg",
+    "sets": 4,
+    "reps": 6,
+    "type": "Strength"
+  },
+
+  {
+    "id": "back_4",
+    "muscle": "Back",
+    "name": "Bent Over Rows",
+    "imageUrl": "https://i.pinimg.com/1200x/7f/b8/93/7fb8933e8e872e7f64ed9ff3a535645b.jpg",
+    "sets": 4,
     "reps": 10,
-    "type": "Bodyweight"
-  },
-  {
-    "id": "chest_3",
-    "muscle": "Chest",
-    "name": "Decline Push Ups",
-    "imageUrl": "https://i.pinimg.com/736x/fc/c3/dc/fcc3dcf2dd5eecf923e16ec5b25b0f76.jpg",
-    "sets": 3,
-    "reps": 10,
-    "type": "Bodyweight"
-  },
-  {
-    "id": "chest_4",
-    "muscle": "Chest",
-    "name": "Bench Press",
-    "imageUrl": "https://i.pinimg.com/736x/1a/07/18/1a0718edc71b34a376a2d24a4a5db38b.jpg",
-    "sets": 4,
-    "reps": 8,
     "type": "Strength"
   },
+
   {
-    "id": "chest_5",
-    "muscle": "Chest",
-    "name": "Incline Bench Press",
-    "imageUrl": "https://i.pinimg.com/736x/ed/f9/1b/edf91bff28d5954ad25a2a5edfe2a44a.jpg",
-    "sets": 4,
-    "reps": 8,
-    "type": "Strength"
-  },
-  {
-    "id": "chest_6",
-    "muscle": "Chest",
-    "name": "Decline Bench Press",
-    "imageUrl": "https://i.pinimg.com/736x/4a/15/38/4a1538b4efcabfe40d3132f6b3c7bc0d.jpg",
-    "sets": 4,
-    "reps": 8,
-    "type": "Strength"
-  },
-  {
-    "id": "chest_7",
-    "muscle": "Chest",
-    "name": "Dumbbell Fly",
-    "imageUrl": "https://i.pinimg.com/736x/5d/50/8d/5d508df80b765e0e04b2745af786e3e2.jpg",
+    "id": "back_6",
+    "muscle": "Back",
+    "name": "Lat Pulldown",
+    "imageUrl": "https://i.pinimg.com/1200x/c0/fe/9e/c0fe9ed6b12073800f817edb57957eaf.jpg",
     "sets": 3,
     "reps": 12,
     "type": "Strength"
   },
 
   {
-    "id": "legs_1",
-    "muscle": "Legs",
-    "name": "Leg Press",
-    "imageUrl": "https://i.pinimg.com/736x/7a/89/c8/7a89c89b9c48c1cfa1c678a4f6c7a5a1.jpg",
-    "sets": 4,
-    "reps": 12,
-    "type": "Strength"
-  },
-  {
-    "id": "legs_2",
-    "muscle": "Legs",
-    "name": "Leg Extensions",
-    "imageUrl": "https://i.pinimg.com/736x/d3/6f/5c/d36f5cc97d8dbfdbd62de99f75f48de6.jpg",
-    "sets": 3,
-    "reps": 12,
-    "type": "Strength"
-  },
-  {
-    "id": "legs_3",
-    "muscle": "Legs",
-    "name": "Hamstring Curls",
-    "imageUrl": "https://i.pinimg.com/736x/37/4a/bf/374abfcd7d47d4aaad05f1c18e6a0d22.jpg",
-    "sets": 3,
-    "reps": 12,
-    "type": "Strength"
-  },
-  {
-    "id": "legs_4",
-    "muscle": "Legs",
-    "name": "Bulgarian Split Squat",
-    "imageUrl": "https://i.pinimg.com/736x/25/18/68/251868c48dcd9c1a2679df2c8248598e.jpg",
-    "sets": 3,
-    "reps": 10,
-    "type": "Strength"
-  },
-  {
-    "id": "legs_5",
-    "muscle": "Legs",
-    "name": "Step Ups",
-    "imageUrl": "https://i.pinimg.com/736x/41/44/07/414407dca59cdd09c0b02ed1d3d79018.jpg",
-    "sets": 3,
-    "reps": 12,
-    "type": "Bodyweight"
-  },
-  {
-    "id": "legs_6",
-    "muscle": "Legs",
-    "name": "Calf Raises",
-    "imageUrl": "https://i.pinimg.com/736x/91/38/7e/91387e2d87e6f7bfb8cc1d03b3729f1e.jpg",
-    "sets": 4,
-    "reps": 15,
-    "type": "Strength"
-  },
-  {
-    "id": "back_1",
-    "muscle": "Back",
-    "name": "Pull Ups",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/05/05/pull-up-1868634_1280.png",
-    "sets": 3,
-    "reps": 8,
-    "type": "Strength"
-  },
-  {
-    "id": "back_2",
-    "muscle": "Back",
-    "name": "Deadlift",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/12/54/deadlift-1869432_1280.png",
-    "sets": 4,
-    "reps": 6,
-    "type": "Strength"
-  },
-  {
-    "id": "back_3",
-    "muscle": "Back",
-    "name": "Chin Ups",
-    "imageUrl": "https://i.pinimg.com/736x/f0/ea/42/f0ea4227dd6e5f5f10c12ef5768a507f.jpg",
-    "sets": 3,
-    "reps": 8,
-    "type": "Strength"
-  },
-  {
-    "id": "back_4",
-    "muscle": "Back",
-    "name": "Bent Over Rows",
-    "imageUrl": "https://i.pinimg.com/736x/b2/92/76/b29276c4f8808ff06405d4953ea055cb.jpg",
-    "sets": 4,
-    "reps": 10,
-    "type": "Strength"
-  },
-  {
-    "id": "back_5",
-    "muscle": "Back",
-    "name": "Deadlifts",
-    "imageUrl": "https://i.pinimg.com/736x/f9/5d/f0/f95df0a7ecda39d9c8fc2ac2e53f2683.jpg",
-    "sets": 4,
-    "reps": 6,
-    "type": "Strength"
-  },
-  {
-    "id": "back_6",
-    "muscle": "Back",
-    "name": "Lat Pulldown",
-    "imageUrl": "https://i.pinimg.com/736x/3c/65/0c/3c650c46f0dd410f8a9f31db6a10b1cf.jpg",
-    "sets": 3,
-    "reps": 12,
-    "type": "Strength"
-  },
-  {
-    "id": "back_7",
-    "muscle": "Back",
-    "name": "Superman Hold",
-    "imageUrl": "https://i.pinimg.com/736x/0f/b5/49/0fb54994d6e8a7d88d0e0f917f82a1e6.jpg",
-    "sets": 3,
-    "reps": 20,
-    "type": "Bodyweight"
-  }
-,{
-    "id": "arms_1",
-    "muscle": "Arms",
-    "name": "Bicep Curls",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/04/09/biceps-1868602_1280.png",
-    "sets": 3,
-    "reps": 12,
-    "type": "Strength"
-  },
-  {
     "id": "arms_2",
     "muscle": "Arms",
+    'gif':"https://images.everydayhealth.com/images/healthy-living/fitness/tricep-dip.gif?w=1110",
     "name": "Tricep Dips",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/04/25/triceps-1868616_1280.png",
+    "imageUrl": "https://i.pinimg.com/736x/0c/15/66/0c15663fac9db88b9b0bbaf3bc659eaf.jpg",
     "sets": 3,
     "reps": 10,
     "type": "Strength"
@@ -204,24 +165,16 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "abs_1",
     "muscle": "Abs",
     "name": "Crunches",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/04/13/crunches-1868606_1280.png",
+    "imageUrl": "https://i.pinimg.com/1200x/db/b6/75/dbb67584e212a4400ef9265f0802863b.jpg",
     "sets": 3,
     "reps": 15,
-    "type": "Strength"
-  },{
-    "id": "arms_1",
-    "muscle": "Arms",
-    "name": "Bicep Curls",
-    "imageUrl": "https://i.pinimg.com/736x/5c/8e/72/5c8e72cdd91eb8a4a8b5b45c7a6f5d3f.jpg",
-    "sets": 4,
-    "reps": 12,
     "type": "Strength"
   },
   {
     "id": "arms_2",
     "muscle": "Arms",
     "name": "Hammer Curls",
-    "imageUrl": "https://i.pinimg.com/736x/0a/3b/6d/0a3b6d95d2bfa8f3c2f4571e6f0f3d60.jpg",
+    "imageUrl": "https://i.pinimg.com/1200x/69/36/71/69367131cbc6b9b1d78b7382da41f3fa.jpg",
     "sets": 4,
     "reps": 12,
     "type": "Strength"
@@ -230,7 +183,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "arms_3",
     "muscle": "Arms",
     "name": "Tricep Dips",
-    "imageUrl": "https://i.pinimg.com/736x/56/8a/9a/568a9ad1ebde4e3e8c5d7f04efdf0a6e.jpg",
+    "imageUrl": "https://i.pinimg.com/736x/a8/f0/5a/a8f05a64526e1150fd6f576b94eeb048.jpg",
     "sets": 3,
     "reps": 15,
     "type": "Bodyweight"
@@ -239,7 +192,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "arms_4",
     "muscle": "Arms",
     "name": "Overhead Tricep Extension",
-    "imageUrl": "https://i.pinimg.com/736x/5b/1f/77/5b1f776312c5e0d7767a8a289f6a20d4.jpg",
+    "imageUrl": "https://i.pinimg.com/1200x/57/94/6a/57946a07749fc8c93c7f2f1a46720856.jpg",
     "sets": 4,
     "reps": 12,
     "type": "Strength"
@@ -248,7 +201,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "abs_2",
     "muscle": "Abs",
     "name": "Plank",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/11/57/plank-1869294_1280.png",
+    "imageUrl": "https://i.pinimg.com/736x/bc/da/0f/bcda0f9405fa5e73a0da7ceee76f8a11.jpg",
     "sets": 3,
     "reps": 45,
     "type": "Core"
@@ -257,7 +210,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "abs_3",
     "muscle": "Abs",
     "name": "Russian Twists",
-    "imageUrl": "https://i.pinimg.com/736x/cf/5a/6e/cf5a6e72b4e792c0d17c2c9d32562e2a.jpg",
+    "imageUrl": "https://i.pinimg.com/736x/60/e7/70/60e77000d9b3b41d818613ba1db1c4b8.jpg",
     "sets": 3,
     "reps": 20,
     "type": "Bodyweight"
@@ -266,7 +219,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "abs_4",
     "muscle": "Abs",
     "name": "Leg Raises",
-    "imageUrl": "https://i.pinimg.com/736x/65/0c/7c/650c7cd8f80eaa58dc99b8d14ad7d191.jpg",
+    "imageUrl": "https://i.pinimg.com/1200x/a9/c0/35/a9c035e831c0123f1f350f750e6fcfa9.jpg",
     "sets": 3,
     "reps": 12,
     "type": "Bodyweight"
@@ -275,7 +228,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "abs_5",
     "muscle": "Abs",
     "name": "Cable Crunch",
-    "imageUrl": "https://i.pinimg.com/736x/9d/21/83/9d21839cb97e317c963152586963e50d.jpg",
+    "imageUrl": "https://i.pinimg.com/736x/ef/fb/54/effb5424195f4ba95c5de4fe3f45ea3b.jpg",
     "sets": 4,
     "reps": 12,
     "type": "Strength"
@@ -284,35 +237,18 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "abs_6",
     "muscle": "Abs",
     "name": "Mountain Climbers",
-    "imageUrl": "https://i.pinimg.com/736x/3b/18/c8/3b18c88e7c258c3c19242deff5737a61.jpg",
+    "imageUrl": "https://i.pinimg.com/736x/ad/41/79/ad417942d83b64b35fb4d2cfb3fb778a.jpg",
     "sets": 3,
     "reps": "30 sec",
     "type": "Cardio"
   }
 ,
-  {
-    "id": "shoulders_1",
-    "muscle": "Shoulders",
-    "name": "Shoulder Press",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/12/29/shoulder-press-1869396_1280.png",
-    "sets": 3,
-    "reps": 10,
-    "type": "Strength"
-  },
-  {
-    "id": "shoulder_2",
-    "muscle": "Shoulder",
-    "name": "Arnold Press",
-    "imageUrl": "https://i.pinimg.com/736x/8f/6f/32/8f6f32e5f5c74e9dd3aaf983db4a7b1d.jpg",
-    "sets": 3,
-    "reps": 10,
-    "type": "Strength"
-  },
+
   {
     "id": "shoulder_3",
     "muscle": "Shoulder",
     "name": "Front Raises",
-    "imageUrl": "https://i.pinimg.com/736x/95/3b/3d/953b3d5dfd1c73039a5a597d4f5c49cb.jpg",
+    "imageUrl": "https://i.pinimg.com/1200x/fa/d9/46/fad946bb92773aedb56c6955130b6056.jpg",
     "sets": 3,
     "reps": 12,
     "type": "Strength"
@@ -321,7 +257,7 @@ List<Map<String ,dynamic>> Workouts =[
     "id": "shoulder_4",
     "muscle": "Shoulder",
     "name": "Reverse Fly",
-    "imageUrl": "https://i.pinimg.com/736x/c9/10/bd/c910bd89b6b830d77e731ed4f98e2e3f.jpg",
+    "imageUrl": "https://i.pinimg.com/736x/41/0c/72/410c7295e65d8679a9a9a429dd2ab03a.jpg",
     "sets": 3,
     "reps": 12,
     "type": "Strength"
@@ -345,19 +281,10 @@ List<Map<String ,dynamic>> Workouts =[
     "type": "Strength"
   },
   {
-    "id": "shoulder_7",
-    "muscle": "Shoulder",
-    "name": "Handstand Push Ups",
-    "imageUrl": "https://i.pinimg.com/736x/05/55/12/055512535b6b9866a41643c5a23d49a5.jpg",
-    "sets": 3,
-    "reps": 8,
-    "type": "Bodyweight"
-  },
-  {
     "id": "shoulders_8",
     "muscle": "Shoulders",
     "name": "Lateral Raises",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/11/29/12/05/lateral-raise-1869321_1280.png",
+    "imageUrl": "https://i.pinimg.com/736x/76/6b/99/766b99ec5af5b8e709b86deae085516a.jpg",
     "sets": 3,
     "reps": 12,
     "type": "Strength"

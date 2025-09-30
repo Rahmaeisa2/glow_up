@@ -21,7 +21,6 @@ class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
   @override
   void initState() {
     super.initState();
-    // Load previously selected activity level if exists
     _loadPreviousSelection();
   }
 
@@ -37,7 +36,6 @@ print("Name : ${selectedLevel.name}");
 
   }
   void _loadPreviousSelection() {
-    // إذا كان فيه activity level قديم في UserAnswer
     if (UserAnswer.activityLevel != null) {
       String savedActivityName = UserAnswer.activityLevel!['name'];
       int savedIndex = ActivityLevel.values.indexWhere(

@@ -6,6 +6,7 @@ final List<Map<String, dynamic>> recipes = [
       "name": "Greek Yogurt with Granola",
       "imageUrl": "https://greatcookingtips.com/wp-content/webp-express/webp-images/uploads/2025/05/greek-yogurt-with-granola-and-blueberries-before_prepare-1.png.webp",
       "category": "High Protein",
+    'target':'gain_muscle',
       "calories": 280,
       "protein": 15,
       "carbs": 35,
@@ -34,6 +35,7 @@ final List<Map<String, dynamic>> recipes = [
       "imageUrl": "https://www.katheats.com/wp-content/uploads/2024/03/7.png.webp",
       "category": "Healthy Fats",
       "calories": 320,
+    'target':'lose_weight',
       "protein": 8,
       "carbs": 30,
       "fat": 18,
@@ -62,6 +64,7 @@ final List<Map<String, dynamic>> recipes = [
         "imageUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEfxkxSfbhl3skMA4N8gqs7PTdu6hAV8P2Fte-s0TM477PHDWc7g55OaO-Ve1Db6K3kVtSfoMHfihDONu-0hFOEKHN-gNHNOYcbRAnzM4XOCZHGnG8bb5oJ-u66WYJFElJI96RN78l6A8/s1600/Best-Ever-Tuna-Salad-%25283%2529.jpg",
         "category": "High Protein",
         "calories": 350,
+    'target':'lose_weight',
         "protein": 25,
         "carbs": 8,
         "fat": 15,
@@ -85,7 +88,9 @@ final List<Map<String, dynamic>> recipes = [
   {
         "id": "recipe_d1",
         "name": "Veggie Wrap with Peanut Butter",
-        "imageUrl": "https://www.connoisseurusveg.com/wp-content/uploads/2021/08/vegan-wraps-3-of-5.jpg",
+    'target':'gain_muscle',
+
+    "imageUrl": "https://www.connoisseurusveg.com/wp-content/uploads/2021/08/vegan-wraps-3-of-5.jpg",
         "category": "Healthy Fats",
         "calories": 360,
         "protein": 12,
@@ -111,6 +116,7 @@ final List<Map<String, dynamic>> recipes = [
   {
     "id": "recipe_003",
     "name": "Shakshuka",
+    'target':'gain_muscle',
     "imageUrl": "https://recipesman.com/wp-content/webp-express/webp-images/uploads/2025/08/The_Best_Shakshuka_Recipe_Ever_1_BLOG_SAExa.png.webp",
     "category": "High Protein",
     "calories": 250,
@@ -173,6 +179,9 @@ final List<Map<String, dynamic>> recipes = [
     "imageUrl": "https://mollyshomeguide.com/wp-content/uploads/2025/01/image_a94d75c5a5714d83947ac4e9e40a1365.webp",
     "category": "High Protein",
     "calories": 400,
+    'target':'gain_muscle',
+
+
     "protein": 35,
     "carbs": 20,
     "fat": 18,
@@ -226,6 +235,8 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Quinoa Veggie Bowl",
     "imageUrl": "https://recipebyme.com/cdn-cgi/image/fit=contain,width=1024,format=auto/assets/images/1738272069085-8gcngjzk.webp",
     "category": "High Fiber",
+    'target':'lose_weight',
+
     "calories": 380,
     "protein": 15,
     "carbs": 50,
@@ -248,6 +259,33 @@ final List<Map<String, dynamic>> recipes = [
     "mealType": "lunch"
   },
   {
+    "recipeId": "fish004",
+    "name": "Spicy Grilled Shrimp",
+    "mealType": "lunch",
+    "target": "gain_muscle",
+    "ingredients": [
+      { "name": "Shrimp (peeled, deveined)", "quantity": "200g" },
+      { "name": "Olive oil", "quantity": "1 tbsp" },
+      { "name": "Chili flakes", "quantity": "1 tsp" },
+      { "name": "Garlic", "quantity": "2 cloves, minced" },
+      { "name": "Lime juice", "quantity": "1 tbsp" },
+      { "name": "Salt", "quantity": "1/2 tsp" },
+      { "name": "Black pepper", "quantity": "1/4 tsp" }
+    ],
+    "steps": [
+      "Marinate shrimp with olive oil, garlic, chili flakes, lime juice, salt, and pepper for 20 minutes.",
+      "Grill on medium heat for 2–3 minutes per side until pink and cooked through.",
+      "Serve hot with extra lime wedges."
+    ],
+    "calories": 190,
+    "protein": 32,
+    "fats": 7,
+    'carbs':'2',
+
+    "imageUrl": "https://i.pinimg.com/1200x/36/5e/55/365e55b997a8b3488bf07dc2f20cb2ee.jpg"
+  },
+
+  {
     "id": "recipe_l6",
     "name": "Lentil & Veggie Stew",
     "imageUrl": "https://savortheflavour.com/wp-content/uploads/2022/08/Moroccan-Lentil-Stew-Finals-1200-3.jpg",
@@ -255,6 +293,7 @@ final List<Map<String, dynamic>> recipes = [
     "calories": 350,
     "protein": 18,
     "carbs": 45,
+    'target':'gain_muscle',
     "fat": 10,
     "servings": 1,
     "ingredients": [
@@ -279,6 +318,7 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Baked Lemon Herb Chicken",
     "imageUrl": "https://i0.wp.com/www.cookinginmygenes.com/wp-content/uploads/2021/02/Easy-Healthy-Baked-Lemon-Chicken-7119.jpg",
     "category": "High Protein",
+    'target':'lose_weight',
     "calories": 400,
     "protein": 35,
     "carbs": 10,

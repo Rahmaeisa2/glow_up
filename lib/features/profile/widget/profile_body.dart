@@ -33,15 +33,11 @@ class ProfileBody extends StatelessWidget {
                 height: 250,
                 width: 360,
                 decoration: BoxDecoration(
+
                   borderRadius: BorderRadius.circular(16),
-                  color: Colors.grey[300],
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12.withOpacity(0.3),
-                      offset: Offset(4,2),
-                      blurRadius: 7,
-                    )
-                  ],
+                    color: ColorsApp.p.withOpacity(0.1),
+                    boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)]
+
                 ),
                 child:
                       DataCard(userData: userData),
@@ -80,8 +76,8 @@ class ProfileBody extends StatelessWidget {
                       )
                           : null,
                     ),
-                    child: image == null
-                        ? const Icon(Icons.camera_alt, color: Colors.white, size: 21)
+                    child:image == null
+                        ? Icon(Icons.person, size: 50, color: Colors.grey[600])
                         : null,
                   ),
                 ),

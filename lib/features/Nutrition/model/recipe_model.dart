@@ -2,6 +2,8 @@ class RecipeModel {
   final String id;
   final String name;
   final String imageUrl;
+  final String target;
+  final String mealType;
   final int calories;
   final List<String> tags;
   final int protein ;
@@ -14,7 +16,9 @@ class RecipeModel {
   RecipeModel({
     required this.id,
     required this.name,
+    required this.target,
     required this.imageUrl,
+    required this.mealType,
     required this.calories,
     required this.tags,
     required this.protein,
@@ -32,6 +36,7 @@ class RecipeModel {
       id: documentId,
       name: data['name'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
+      target: data['target'] ?? '',
       calories: data['calories'] ?? 0,
       tags: List<String>.from(data['tags'] ?? []),
       protein: data['protein'] ??0,
@@ -40,6 +45,9 @@ class RecipeModel {
       ingredients: List<Map<String, dynamic>>.from(data['ingredients'] ?? []),
       steps: List<String>.from(data['steps'] ?? []),
       tips: data['tips'] ??'',
+      mealType: data['mealType'] ??'',
+
+
 
 
     );

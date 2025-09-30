@@ -42,15 +42,16 @@ class WorkoutCard extends StatelessWidget {
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 120,
-                ),
-                const SizedBox(height: 12),
+                )
+                ,
+                const SizedBox(height: 10),
                 Text(
                   workout.name,
                   style: GoogleFonts.aDLaMDisplay(
-                    textStyle: const TextStyle(fontSize: 20),
+                    textStyle: const TextStyle(fontSize: 18),
                   ),
                 ),
-                const SizedBox(height: 14),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(

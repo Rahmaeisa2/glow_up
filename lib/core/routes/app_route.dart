@@ -1,7 +1,10 @@
+import 'package:glow_up_app/features/Home/Model/recommendation_video_model.dart';
+import 'package:glow_up_app/features/Home/video_details.dart';
 import 'package:glow_up_app/features/frist_screen.dart';
 import 'package:glow_up_app/features/muscles/model/muscles_model.dart';
 import 'package:glow_up_app/features/muscles/presentation/muscles_screen.dart';
 import 'package:glow_up_app/features/workout/model/workout_model.dart';
+import 'package:glow_up_app/features/workout/presentation/workout_detail_screen.dart';
 import 'package:glow_up_app/features/workout/presentation/workout_screen.dart';
 
 
@@ -30,6 +33,9 @@ class AppRoutes {
     static const String recipeDetails = '/recipreDetail';
   static const String muscles = '/muscles';
   static const String workout = '/workout';
+  static const String workoutDetails = '/workoutDetails';
+
+  static const String videoDetails = '/videoDetails';
 
 
 
@@ -69,8 +75,17 @@ class AppRouter {
         final muscleName  = settings.arguments as String;
 
         return MaterialPageRoute(builder: (_) => WorkoutScreen( muscleName: muscleName ));
+      case AppRoutes.workoutDetails:
+        final workoutName  = settings.arguments as WorkoutModel;
 
-    default:
+        return MaterialPageRoute(builder: (_) => WorkoutDetailScreen( workout: workoutName ));
+
+      case AppRoutes.videoDetails:
+        final video  = settings.arguments as RecommendedVideoModel;
+
+        return MaterialPageRoute(builder: (_) => VideoDetails( video: video, ));
+
+      default:
     return MaterialPageRoute(
     builder: (_) => Scaffold(
     body: Center(

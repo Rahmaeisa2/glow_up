@@ -25,7 +25,7 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
     HomeScreen(),      // index 0
     MusclesScreen(),     // index 1
     SearchScreen(),    // index 2
-    NutrituonScreen(),    // index 3
+    NutritionScreen(),    // index 3
     ProfileScreen(),   // index 4
   ];
 
