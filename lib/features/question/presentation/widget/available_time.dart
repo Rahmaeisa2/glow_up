@@ -57,13 +57,11 @@ class _AvailableTimeState extends State<AvailableTime> {
           ),
           child: Column(
             children: [
-              Text("How much time can you give daily?",
-            style: GoogleFonts.aDLaMDisplay(
-              textStyle: const TextStyle(
-                  color: ColorsApp.p,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-              ),
+              Text(textAlign: TextAlign.center,
+                "How much time can you give daily?",
+            style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color:
+                 Theme.of(context).colorScheme.primary
               ),
               ),
               SizedBox(

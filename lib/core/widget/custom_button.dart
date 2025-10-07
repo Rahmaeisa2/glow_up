@@ -19,17 +19,18 @@ class CustomButton extends StatelessWidget {
         decoration: BoxDecoration(
         color: background,
             borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: ColorsApp.p)
+          border: Border.all(color:Theme.of(context).hintColor),
         ),
         child: Center(
-          child: Text(name , style:GoogleFonts.aDLaMDisplay(
-            textStyle: TextStyle(
-    color: background ==null ? ColorsApp.p : Colors.white,
-              fontSize: 20,
+          child: Text(name ,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              color: background == null
+                  ? Theme.of(context).colorScheme.primary
+                  : Colors.white,
     ),
           ),
         ),
       ),
-    ));
+    );
   }
 }

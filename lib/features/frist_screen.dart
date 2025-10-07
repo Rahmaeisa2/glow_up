@@ -4,7 +4,9 @@ import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
+import '../core/theming/theming_provider.dart';
 import '../core/widget/responsive.dart';
 import 'login/presentation/login_screen.dart';
 import 'register/presentation/register_screen.dart';
@@ -17,21 +19,15 @@ class FristScreen extends StatelessWidget {
     SizeConfig.init(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-       // elevation: 1,
-        leading: InkWell(
-          onTap: (){
-          Navigator.pop(context);
-  },
-          child: Icon(
-            Icons.arrow_back_ios_new_outlined,
-            size: 25,
-          ),
-        ),
+        automaticallyImplyLeading: false,
+       elevation: 1,
+
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: 28,
+          horizontal: 34,
           vertical: 60
         ),
         child: Center(
@@ -42,35 +38,31 @@ class FristScreen extends StatelessWidget {
                  width: double.infinity,
                ),
               Text("HELLO!",
-                style: GoogleFonts.alexandria(
-                  textStyle: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                style:  Theme.of(context).textTheme.displaySmall!.copyWith(
+                  color: Theme.of(context).colorScheme.primary
+                )
               ),
               SizedBox(
                 height: 7),
               Text(
                 textAlign: TextAlign.center
                 ,"Get ready to push limits.\nYour transformation starts now.",
-                style: GoogleFonts.aDLaMDisplay(
-                  textStyle: TextStyle(
-                    color: ColorsApp.p,
-                    fontSize: 20,
-                  ),
-                ),
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                  color: Theme.of(context).colorScheme.surfaceTint
+                )
               ),
               SizedBox(
                 height: 26,
               ),
-              CustomButton(name: "Login", onTap: (){
+              CustomButton(
+                  name: "Login", onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
               }),
               SizedBox(
                 height: 15,
               ),
-              CustomButton(name: "Register", background: ColorsApp.p, onTap: (){
+              CustomButton(name: "Register", background:Theme.of(context).colorScheme.primary
+            , onTap: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterScreen()));
               })
 

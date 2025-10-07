@@ -23,12 +23,21 @@ class ContainerForQuestionScreen extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+
         margin: EdgeInsets.only(bottom: 16),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.indigo[100] : Colors.grey[100],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+
+        color:  isSelected?  Theme.of(context).colorScheme.surfaceContainer : Theme.of(context).colorScheme.surfaceVariant,
           border: Border.all(
-            color: isSelected ? Colors.indigo : Colors.grey,
+            color: isSelected? Colors.white24 :Colors.transparent,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(16),
@@ -40,21 +49,20 @@ class ContainerForQuestionScreen extends StatelessWidget {
             Expanded(
               child: Text(
                 title,
-                style: GoogleFonts.aDLaMDisplay(
-                  textStyle: TextStyle(
-                    color: ColorsApp.p,
-                    fontSize: 16,
+                style:  Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color:
+                    Theme.of(context).colorScheme.onSecondaryFixedVariant,
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
                   ),
                 ),
               ),
-            ),
+
             if (text != null)
               Text(
                 text!,
                 style: GoogleFonts.aDLaMDisplay(
                   textStyle: TextStyle(
-                    color: ColorsApp.p,
+                    color:Theme.of(context).primaryColor,
                     fontSize: 16,
                     fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
                   ),

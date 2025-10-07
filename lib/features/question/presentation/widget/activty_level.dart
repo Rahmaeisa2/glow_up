@@ -53,7 +53,6 @@ print("Name : ${selectedLevel.name}");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
 
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 20),
@@ -61,11 +60,10 @@ print("Name : ${selectedLevel.name}");
             children: [
               Text(
             'What is your daily activity level?',
-            style: GoogleFonts.cairo(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
+            style:  Theme.of(context).textTheme.displaySmall?.copyWith(
+              color:
+              Theme.of(context).colorScheme.primary
+          ),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 10),
@@ -83,9 +81,17 @@ print("Name : ${selectedLevel.name}");
                     margin: EdgeInsets.only(bottom: 16),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                     decoration: BoxDecoration(
-                      color: isSelected ? Colors.indigo[100] : Colors.grey[100],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 4,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+
+                      color: isSelected ?  Theme.of(context).colorScheme.surfaceContainer: Theme.of(context).colorScheme.surfaceVariant,
                       border: Border.all(
-                        color: isSelected ? Colors.indigo : Colors.grey,
+                        color: isSelected? Colors.white24 :Colors.transparent,
                         width: 2,
                       ),
                       borderRadius: BorderRadius.circular(16),
@@ -94,10 +100,10 @@ print("Name : ${selectedLevel.name}");
                       contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       title: Text(
                         level.displayName,
-                        style: GoogleFonts.cairo(
-                          fontSize: 18,
-                          fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
-                          color: isSelected ? ColorsApp.p : Colors.black87,
+                        style:  Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color:
+                          Theme.of(context).colorScheme.onSecondaryFixedVariant,
+                          fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
                         ),
                       ),
                       subtitle: Column(
@@ -109,7 +115,7 @@ print("Name : ${selectedLevel.name}");
                       ),
                       value: index,
                       groupValue: _selectedActivityLevelIndex,
-                      activeColor: ColorsApp.p,
+                      activeColor: Theme.of(context).primaryColor,
                       onChanged: (value) {
                         setState(() {
                           _selectedActivityLevelIndex = value!;

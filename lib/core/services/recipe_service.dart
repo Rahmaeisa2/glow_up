@@ -46,7 +46,7 @@ class RecipeService {
       final updatedDoc = await _recipesCollection.doc(_userId).get();
 
       if (updatedDoc.exists) {
-        return updatedDoc.data() as Map<String, dynamic>;
+        print("${recipe}is updated");
       }
       return null;
     } catch (e) {

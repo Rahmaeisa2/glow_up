@@ -33,7 +33,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final snapshot = await FirebaseFirestore.instance
         .collection("meals")
         .where('name', isGreaterThanOrEqualTo: query.toLowerCase())
-        .where('name', isLessThanOrEqualTo: query + '\uf8ff') // 🔥 عشان يبدأ بأي كلمة
+        .where('name', isLessThanOrEqualTo: query + '\uf8ff')
         .get();
 
     print("Documents found: ${snapshot.docs.length}");
@@ -85,12 +85,9 @@ class _SearchScreenState extends State<SearchScreen> {
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
-
+        automaticallyImplyLeading: false,
         title: const Text("Search"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
+
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 50),
@@ -102,7 +99,7 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(color: ColorsApp.primary),
+                  borderSide:  BorderSide(color:Theme.of(context).colorScheme.primary),
                 ),
                 hintText: 'Enter meal name...',
                 suffixIcon: IconButton(

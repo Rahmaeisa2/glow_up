@@ -10,10 +10,9 @@ import 'package:glow_up_app/test.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/routes/app_route.dart';
-import '../../../core/theming/app_color.dart';
 
+import '../../../core/services/auth_service.dart';
 import '../../../core/widget/responsive.dart';
-import '../../register/presentation/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -42,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(
         leading: InkWell(
           onTap: (){
-            Navigator.pop(context);
+            Navigator.maybePop(context);
           },
           child: const Icon(Icons.arrow_back_ios_new_outlined ,
           size: 22,),
@@ -57,34 +56,22 @@ class _LoginScreenState extends State<LoginScreen> {
           key: formKey,
           child: SingleChildScrollView(
             child: Column(
-               // crossAxisAlignment: CrossAxisAlignment.start,
+               crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                Text(" Welcome back" ,
-                  style: GoogleFonts.aDLaMDisplay(
-                    textStyle: const TextStyle(
-                        color: ColorsApp.p,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w400
-                    ),
-                  ),),
-                  Text(" Login to continue " ,
-                    style: GoogleFonts.aDLaMDisplay(
-                      textStyle: const TextStyle(
-                          color: ColorsApp.p,
-                          fontSize: 20,
-                      ),
-                    ),),
+                Text(" Login" ,
+                  style:Theme.of(context).textTheme.displayMedium?.copyWith(
+              color:
+              Theme.of(context).colorScheme.primary,),),
+                  SizedBox(height: 9,),
+                  Text("Please Sign in to continue " ,
+                    style:Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    color:
+                        Theme.of(context).colorScheme.primary,),),
                   const SizedBox(
                     height: 50
                   ),
                   CustomTextFormField(
-
-                      isObscure: _isObscure,
-                      onToggle: () {
-                        setState(() {
-                          _isObscure = !_isObscure;
-                        });
-                      }, onChanged: (value) {
+                      onChanged: (value) {
                     UserAnswer.email =value;},
                       validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -111,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       hintText: "Password", title: "Password", controller: passwordController),
                   const SizedBox(height: 25,),
                   CustomButton(name: "Login",
-                      background:ColorsApp.p,
+                      background: Theme.of(context).colorScheme.primary,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
                           final email = loginController.text.trim();
@@ -128,72 +115,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ).show();
                             return;
                           }
-
-                          try {
-                            final userCredential = await FirebaseAuth.instance
-                                .signInWithEmailAndPassword(email: email, password: password);
-
-                            final user = FirebaseAuth.instance.currentUser;
-
-                            if (user != null && user.emailVerified) {
-                              print("✅ Email verified. Logged in: ${user.email}");
-                              Navigator.pushNamed(context, AppRoutes.questions);
-                            } else {
-                              print("⚠️ Email not verified.");
-                              await AwesomeDialog(
-                                context: context,
-                                dialogType: DialogType.warning,
-                                animType: AnimType.rightSlide,
-                                title: 'Email not verified',
-                                desc: 'Please verify your email before logging in.',
-                                btnOkOnPress: () async {
-                                  await user?.sendEmailVerification();
-                                },
-                              ).show();
-                            }
-                          } on FirebaseAuthException catch (e) {
-                            print("❌ FirebaseAuthException: ${e.code} - ${e.message}");
-
-                            String errorMessage;
-                            switch (e.code) {
-                              case 'user-not-found':
-                                errorMessage = 'No user found for that email.';
-                                break;
-                              case 'wrong-password':
-                                errorMessage = 'Wrong password provided.';
-                                break;
-                              case 'invalid-email':
-                                errorMessage = 'Invalid email address format.';
-                                break;
-                              case 'invalid-credential':
-                                errorMessage = 'Invalid email or password.';
-                                break;
-                              default:
-                                errorMessage = e.message ?? 'Login failed. Please try again.';
-                            }
-
-                            await AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'Login Error',
-                              desc: errorMessage,
-                              btnOkOnPress: () {},
-                            ).show();
-                          } catch (e) {
-                            print("⚠️ General Error: $e");
-                            await AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.error,
-                              animType: AnimType.rightSlide,
-                              title: 'Error',
-                              desc: 'Something went wrong. Please try again.',
-                              btnOkOnPress: () {},
-                            ).show();
-                          }
-                        }
-                      }
-
+                          await AuthService.signInWithEmail(
+                            loginController.text.trim(),
+                            passwordController.text.trim(),
+                            context,
+                          );
+                        }}
                   ),
                   SizedBox(
                     height: 10,
@@ -202,32 +129,25 @@ class _LoginScreenState extends State<LoginScreen> {
                   Row(
                       children: [
                         Checkbox(
-                            activeColor: ColorsApp.p,
+                            activeColor: Theme.of(context).colorScheme.onSecondary,
                             value: value, onChanged: (bool? newValue) {
                           setState(() {
                             value = newValue!;
                           });
                         }),
-                        Text("Remember me?",style: GoogleFonts.alexandria(
-                          textStyle: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-
-                          ),),),
-                        SizedBox(
-                          width: 7,
-                        ),
+                        Text("Remember me?",style:
+                          Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                          )),
+                        
                         TextButton(onPressed: ()async{
                           await FirebaseAuth.instance.sendPasswordResetEmail(email: loginController.text.trim());
 
                         }, child: Text(
                         "Forget Password?" ,
-                        style: GoogleFonts.alexandria(
-                          textStyle: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-
-                          ),),
+                        style:Theme.of(context).textTheme.titleLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.primary
+                        )
                       )),
                       ],
                     ),
@@ -239,23 +159,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already have an account?",
-                        style: GoogleFonts.alexandria(
-                          textStyle: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-
-                          ),),),
+                        style:  Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Theme.of(context).colorScheme.surfaceContainer
+                  )),
                       TextButton(onPressed: () {
                         Navigator.pushNamed(context, AppRoutes.register);
                       }
                       , child: Text(
                         "Sing Up",
-                          style: GoogleFonts.alexandria(
-                            textStyle: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-
-                            ),),))
+                          style:Theme.of(context).textTheme.headlineSmall!.copyWith(
+                              color: Theme.of(context).colorScheme.primary
+                          )))
                     ],
                   )
 

@@ -30,6 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     SizeConfig.init(context);
 
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         leading: InkWell(
           onTap: (){
@@ -42,30 +43,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(
             horizontal: 22,
-            vertical: 20
+            vertical: 50
         ),
         child: Form(
           key: formKey,
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                     "Register",
-              style: GoogleFonts.aDLaMDisplay(
-                textStyle: const TextStyle(
-                    color: ColorsApp.p,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w400
-                ),
+              style:Theme.of(context).textTheme.displayMedium!.copyWith(
+                color: Theme.of(context).primaryColor
               )),
                 Text("Let's get started",
-                      style: GoogleFonts.aDLaMDisplay(
-                        textStyle: const TextStyle(
-                          color: ColorsApp.p,
-                          fontSize: 20,
-                        ),
-                    )),
+                      style:Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color: Theme.of(context).primaryColor
+                      )),
                 const SizedBox(
                     height: 22
                 ),
@@ -136,10 +130,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return "confirmation password must be same as password";
                     }}
                 ),
-                const SizedBox(height: 17,),
+                const SizedBox(height: 20,),
                 CustomButton(
                   name: "Register",
-                  background: ColorsApp.p,
+                  background:Theme.of(context).colorScheme.primary,
                     onTap: () async {
                       if (formKey.currentState!.validate()) {
                         try {
@@ -163,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Navigator.pushNamed(context, AppRoutes.login);
                             },
                           )
-                            ..show();
+                            .show();
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
                             AwesomeDialog(
@@ -174,7 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               desc: 'Please choose a stronger password.',
                               btnOkOnPress: () {},
                             )
-                              ..show();
+                              .show();
                           } else if (e.code == 'email-already-in-use') {
                             AwesomeDialog(
                               context: context,
@@ -184,16 +178,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               desc: 'This email is already associated with another account.',
                               btnOkOnPress: () {},
                             )
-                              ..show();
+                              .show();
                           }
                         } catch (e) {
                           print(e);
                         }
-                      }}
+                      }
+                  }
                 )
-
-
-
               ],
             ),
           ),

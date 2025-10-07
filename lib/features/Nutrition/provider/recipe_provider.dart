@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/features/Nutrition/model/recipe_model.dart';
 
@@ -6,6 +7,8 @@ class RecipeProvider extends ChangeNotifier{
   RecipeService _service = RecipeService();
   Map<String , List<RecipeModel>> recipes = {};
   bool isLoading = false;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
   String errorMessage  ='';
 
   Future <void> loadRecipes(String mealType)async{
@@ -14,21 +17,19 @@ class RecipeProvider extends ChangeNotifier{
     notifyListeners();
 
     try{
-      final stream = _service.getRecipe(mealType);
-      stream.listen((data){
-        recipes[mealType]=data;
+      _firestore
+      .collection('recipes')
+          .where('mealType', isEqualTo: mealType)
+          .snapshots()
+          .listen((snapshot) {
+        recipes[mealType] = snapshot.docs
+            .map((doc) => RecipeModel.fromMap(doc.data(), doc.id))
+            .toList();
         isLoading = false;
-        print("loaded ${data.length} for ${mealType}");
 notifyListeners();
       });
 
 
-    onError: (e) {
-      errorMessage = 'error $e';
-      isLoading = false;
-      print(errorMessage);
-      notifyListeners();
-    };
 
   } catch (e) {
   errorMessage = 'connection error $e';

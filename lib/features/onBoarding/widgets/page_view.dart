@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -21,29 +22,22 @@ class PageViewItem extends StatelessWidget {
 
       ),
         Text(text ,
-        style: GoogleFonts.alexandria(
-          textStyle: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-
-          ),
+        style: Theme.of(context).textTheme.displaySmall!.copyWith(
+    color: Theme.of(context).colorScheme.primary,
+    )
         ),
-       ),
+
         SizedBox(
           height: 13,
         ),
 
         Text(textAlign: TextAlign.center,
           text2,
-          style: GoogleFonts.aDLaMDisplay(
-            textStyle: const TextStyle(
-              color: ColorsApp.p,
-                fontSize: 16,
-                fontWeight: FontWeight.w400
-            ),
-          )
-        ),
+    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+      color: Theme.of(context).colorScheme.surfaceContainer,
 
+        ),
+        )
       ],
     );
   }

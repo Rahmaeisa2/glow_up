@@ -36,12 +36,10 @@ bool? isMale =null;
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text("What's your gender?",
-                  style: GoogleFonts.aDLaMDisplay(
-                    textStyle: const TextStyle(
-                        color: ColorsApp.p,
-                        fontSize: 26,
-                        fontWeight: FontWeight.w400
-                    ),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color:
+                 Theme.of(context).colorScheme.primary
+
                   )
               ),
               SizedBox(
@@ -58,26 +56,25 @@ bool? isMale =null;
     });
     UserAnswer.gender = "Male";
     },
-
                   child: Container(
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(12),
+                      color: Theme.of(context).colorScheme.surfaceBright,
+                    borderRadius: BorderRadius.circular(12),
                      border: Border.all(
-                        color: (isMale == true) ? ColorsApp.p : Colors.transparent,
+                        color: (isMale == true) ? Theme.of(context).colorScheme.primary: Colors.transparent,
                        width: 3,
                      ),
                     ),
                     child: Column(
                       children: [
-                        Icon(Icons.male, size: 60, color:ColorsApp.p),
-                        Text("Male", style: GoogleFonts.aDLaMDisplay(
-                        textStyle: const TextStyle(
-                        color: ColorsApp.p,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400
-                        ),
+                        Icon(Icons.male, size: 60, color:Theme.of(context).colorScheme.primary),
+                        Text("Male",
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color:
+                                Theme.of(context).colorScheme.primary
+
+
                   )),
                       ],
                     ),
@@ -101,22 +98,19 @@ bool? isMale =null;
 
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Colors.grey[100],
+                      color: Theme.of(context).colorScheme.surfaceBright,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: (isMale == false) ? ColorsApp.p : Colors.transparent,
+                        color: (isMale == false) ? Theme.of(context).colorScheme.primary : Colors.transparent,
                         width: 3,
                       ),
                     ),
                     child: Column(
                       children: [
-                        Icon(Icons.female, size: 60, color: ColorsApp.p),
-                        Text("Female",  style: GoogleFonts.aDLaMDisplay(
-                          textStyle: const TextStyle(
-                              color: ColorsApp.p,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400
-                          ),
+                        Icon(Icons.female, size: 60, color: Theme.of(context).colorScheme.primary),
+                        Text("Female", style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color:
+                            Theme.of(context).colorScheme.primary
                         )),
                       ],
                     ),

@@ -38,8 +38,6 @@ class _NutritionScreenState extends State<NutritionScreen>
       itemCount: recipes.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
         childAspectRatio: 0.7,
       ),
       itemBuilder: (context, index) {
@@ -58,7 +56,7 @@ class _NutritionScreenState extends State<NutritionScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    addRecipes();
+    RecipeService().addRecipesIfNotExists(recipes);
     RecipeService().UpdateRecipes(recipes);
   }
 
@@ -86,36 +84,39 @@ class _NutritionScreenState extends State<NutritionScreen>
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(
+        title: Text(textAlign: TextAlign.center,
           'Nutrition',
-          style: GoogleFonts.aDLaMDisplay(
-            textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+          style: Theme.of(context).textTheme.displaySmall
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          TabBar(
-            controller: _tabController,
-            tabs: mealsTab.map((tab) => Tab(text: tab.toUpperCase())).toList(),
-            labelColor: ColorsApp.p,
-            unselectedLabelColor: Colors.grey,
-            labelStyle: GoogleFonts.aDLaMDisplay(
-              textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            unselectedLabelStyle: GoogleFonts.aDLaMDisplay(
-              textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
-            ),
-            indicatorColor: ColorsApp.p,
-            indicatorWeight: 3,
-          ),
-          Expanded(
-            child: TabBarView(
+
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10
+        ),
+        child: Column(
+          children: [
+            TabBar(
               controller: _tabController,
-              children: mealsTab.map((mealType) => buildMealGrid(mealType)).toList(),
+              tabs: mealsTab.map((tab) => Tab(text: tab.toUpperCase())).toList(),
+              labelColor: Theme.of(context).colorScheme.onBackground,
+              unselectedLabelColor: Colors.grey,
+              labelStyle: Theme.of(context).textTheme.titleLarge
+            ,
+              unselectedLabelStyle: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.w500
+              ),
+          indicatorColor: Theme.of(context).colorScheme.onSurface,
+              indicatorWeight: 3,
             ),
-          ),
-        ],
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: mealsTab.map((mealType) => buildMealGrid(mealType)).toList(),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

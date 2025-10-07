@@ -88,7 +88,7 @@ final List<Map<String, dynamic>> recipes = [
   {
         "id": "recipe_d1",
         "name": "Veggie Wrap with Peanut Butter",
-    'target':'gain_muscle',
+    'target':'lose_weight',
 
     "imageUrl": "https://www.connoisseurusveg.com/wp-content/uploads/2021/08/vegan-wraps-3-of-5.jpg",
         "category": "Healthy Fats",
@@ -258,32 +258,6 @@ final List<Map<String, dynamic>> recipes = [
     "tips": "Add grilled tofu for extra protein.",
     "mealType": "lunch"
   },
-  {
-    "recipeId": "fish004",
-    "name": "Spicy Grilled Shrimp",
-    "mealType": "lunch",
-    "target": "gain_muscle",
-    "ingredients": [
-      { "name": "Shrimp (peeled, deveined)", "quantity": "200g" },
-      { "name": "Olive oil", "quantity": "1 tbsp" },
-      { "name": "Chili flakes", "quantity": "1 tsp" },
-      { "name": "Garlic", "quantity": "2 cloves, minced" },
-      { "name": "Lime juice", "quantity": "1 tbsp" },
-      { "name": "Salt", "quantity": "1/2 tsp" },
-      { "name": "Black pepper", "quantity": "1/4 tsp" }
-    ],
-    "steps": [
-      "Marinate shrimp with olive oil, garlic, chili flakes, lime juice, salt, and pepper for 20 minutes.",
-      "Grill on medium heat for 2–3 minutes per side until pink and cooked through.",
-      "Serve hot with extra lime wedges."
-    ],
-    "calories": 190,
-    "protein": 32,
-    "fats": 7,
-    'carbs':'2',
-
-    "imageUrl": "https://i.pinimg.com/1200x/36/5e/55/365e55b997a8b3488bf07dc2f20cb2ee.jpg"
-  },
 
   {
     "id": "recipe_l6",
@@ -292,8 +266,8 @@ final List<Map<String, dynamic>> recipes = [
     "category": "High Fiber",
     "calories": 350,
     "protein": 18,
-    "carbs": 45,
-    'target':'gain_muscle',
+    "carbs": 55,
+    'target':'lose_weight',
     "fat": 10,
     "servings": 1,
     "ingredients": [
@@ -377,10 +351,11 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Grilled Cheese Sandwich",
     "imageUrl": "https://recipescreative.com/wp-content/uploads/2025/06/3a1e0f35-4adf-4534-bf09-1c747a0c909f.webp",
     "category": "Quick Meal",
+    'target':'lose_weight',
     "calories": 300,
     "protein": 12,
     "carbs": 30,
-    "fat": 15,
+    "fats": 15,
     "servings": 1,
     "ingredients": [
       {"name": "Whole Wheat Bread", "quantity": "2 slices"},
@@ -402,6 +377,8 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Veggie Omelette Wrap",
     "imageUrl": "https://www.foodwerk-blog.de/wp-content/uploads/2025/01/IMG_5541.jpg.webp",
     "category": "High Protein",
+    'target':'gain_muscle',
+
     "calories": 320,
     "protein": 18,
     "carbs": 28,
@@ -430,6 +407,8 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Oatmeal with Fruits",
     "imageUrl": "https://nenaswellnesscorner.com/wp-content/uploads/2022/12/Breakfast-oatmeal-with-fruit.jpg",
     "category": "Healthy",
+    'target':'stay_fit',
+
     "calories": 366,
     "protein": 14,
     "carbs": 67,
@@ -457,6 +436,7 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Whole Wheat Pancakes",
     "imageUrl": "https://i.pinimg.com/1200x/5a/d0/c7/5ad0c7f7eda1a81564331cca13745e18.jpg",
     "category": "High Carb",
+    'target':'stay_fit',
     "calories": 340,
     "protein": 9,
     "carbs": 60,
@@ -483,6 +463,7 @@ final List<Map<String, dynamic>> recipes = [
     "name": "Veggie Omelette Wrap",
     "imageUrl": "https://i.pinimg.com/736x/61/34/21/6134215d8b2c3aee67b344b2dc36637d.jpg",
     "category": "High Protein",
+    'target':'lose_weight',
     "calories": 320,
     "protein": 18,
     "carbs": 28,

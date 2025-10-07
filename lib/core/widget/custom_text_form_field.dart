@@ -36,13 +36,11 @@ class CustomTextFormField extends StatelessWidget {
         Text(
           title,
 
-      style: GoogleFonts.aDLaMDisplay(
-        textStyle: const TextStyle(
-            color: ColorsApp.p,
-            fontSize: 23,
-            fontWeight: FontWeight.w400
+      style:
+        Theme.of(context).textTheme.titleLarge?.copyWith(
+          color: Theme.of(context).primaryColor,
         ),
-        ),),
+        ),
          SizedBox(height: 9),
         TextFormField(
           onChanged: onChanged,
@@ -63,10 +61,7 @@ class CustomTextFormField extends StatelessWidget {
             )
                 : null,
             hintText: hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: ColorsApp.primary),
-            ),
+            border:Theme.of(context).inputDecorationTheme.enabledBorder
           ),
         ),
       ],

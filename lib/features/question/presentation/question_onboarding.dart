@@ -96,7 +96,8 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
 
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
       leading: InkWell(
         onTap: (){
           Navigator.pop(context);
@@ -119,7 +120,7 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
                 dotWidth: 30,
                 spacing: 8,
                 radius: 12,
-                activeDotColor: ColorsApp.p,
+                activeDotColor: Theme.of(context).primaryColor,
               ),
                 onDotClicked: (index){
                 }
@@ -150,7 +151,7 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
             CustomButton(
               name:_isLoading ? "Saving data...." :
               currentIndex == 5 ? "Finish" : "Next",
-              background: ColorsApp.p,
+              background: Theme.of(context).colorScheme.primary,
               onTap: () async {
                  if(_isLoading) return;
                 if (currentIndex < 5) {

@@ -38,56 +38,56 @@ class _RecommendMealsState extends State<RecommendMeals> {
       mealsStream = Stream.error(e);
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Recommended Meals",
-          style: GoogleFonts.aDLaMDisplay(
-            textStyle: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          ),),
-        leading: InkWell(onTap: (){
-          Navigator.maybePop(context);
-        },
-            child: Icon(Icons.arrow_back_ios_new_rounded)),
-      ),
-      body: StreamBuilder(stream: mealsStream, builder:(context, snapshot) {
-    if (snapshot.connectionState == ConnectionState.waiting) {
-    return const Center(child: CircularProgressIndicator());
-    }
-    if (snapshot.hasError) {
-    print('Meal stream error: ${snapshot.error}');
-    return Center(child: Text('Error: ${snapshot.error}'));
-    }
-    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-      print('No meals found for target: $userTarget');
-      return Center(child: Text('No recommended meals found'));
-    }
-    final meals = snapshot.data!.docs.map((doc)=>RecipeModel.fromMap(doc.data() as Map<String,dynamic> , doc.id))
-        .where((m) => m.target.isNotEmpty && m.mealType.isNotEmpty)
-        .toList();
-    final breakfast = meals.where((m)=>m.mealType == 'breakfast').take(1).toList();
-    final lunch = meals.where((m) => m.mealType == 'lunch').take(1).toList();
-    final dinner = meals.where((m) => m.mealType == 'dinner').take(1).toList();
-    final mealsToShow = [...breakfast, ...lunch, ...dinner, ];
+        appBar: AppBar(
+          title: Text("Recommended Meals",
+            style: GoogleFonts.aDLaMDisplay(
+              textStyle: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),),
+          leading: InkWell(onTap: (){
+            Navigator.maybePop(context);
+          },
+              child: Icon(Icons.arrow_back_ios_new_rounded)),
+        ),
+        body: StreamBuilder(stream: mealsStream, builder:(context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            print('Meal stream error: ${snapshot.error}');
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            print('No meals found for target: $userTarget');
+            return Center(child: Text('No recommended meals found'));
+          }
+          final meals = snapshot.data!.docs.map((doc)=>RecipeModel.fromMap(doc.data() as Map<String,dynamic> , doc.id))
+              .where((m) => m.target.isNotEmpty && m.mealType.isNotEmpty)
+              .toList();
+          final breakfast = meals.where((m)=>m.mealType == 'breakfast').take(1).toList();
+          final lunch = meals.where((m) => m.mealType == 'lunch').take(1).toList();
+          final dinner = meals.where((m) => m.mealType == 'dinner').take(1).toList();
+          final mealsToShow = [...breakfast, ...lunch, ...dinner, ];
 
-    if (mealsToShow.isEmpty) {
-      print('No meals after filtering for target: $userTarget');
-      return Center(child: Text('No matching meals found', style: Theme.of(context).textTheme.bodyMedium));
-    }
+          if (mealsToShow.isEmpty) {
+            print('No meals after filtering for target: $userTarget');
+            return Center(child: Text('No matching meals found', style: Theme.of(context).textTheme.bodyMedium));
+          }
 
-    return ListView(
-      padding: const EdgeInsets.all(16.0),
-      children: [
-        _buildMealSection(context, 'Breakfast', breakfast),
-        _buildMealSection(context, 'Lunch', lunch),
-        _buildMealSection(context, 'Dinner', dinner),
-      ],
-    );
+          return ListView(
+            padding: const EdgeInsets.all(16.0),
+            children: [
+              _buildMealSection(context, 'Breakfast', breakfast),
+              _buildMealSection(context, 'Lunch', lunch),
+              _buildMealSection(context, 'Dinner', dinner),
+            ],
+          );
 
-      }
+        }
 
-      )
+        )
     );
   }
 }

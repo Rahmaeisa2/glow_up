@@ -26,32 +26,24 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
+            Text(textAlign: TextAlign.center,
               "Let's set your height & weight",
-            style: GoogleFonts.aDLaMDisplay(
-              textStyle: const TextStyle(
-                  color: ColorsApp.p,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400
-              ),
-            )            ),
+            style: Theme.of(context).textTheme.displaySmall,
+                    ),
+
             SizedBox(height: 40),
 
             // Height Section
-            Text("Height",   style: GoogleFonts.aDLaMDisplay(
-              textStyle: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400
-              ),),),
+            Text("Height", style: Theme.of(context).textTheme.displaySmall,),
             SizedBox(height: 8),
-            Text("${height.toInt()} cm", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            Text("${height.toInt()} cm", style: Theme.of(context).textTheme.displayMedium),
             Slider(
               onChangeEnd: (value){
               },
               min: 100,
               max: 220,
               value: height,
-              activeColor:ColorsApp.p,
+              activeColor:Theme.of(context).colorScheme.primary,
               onChanged: (v) {
                 setState(() => height = v);
                 UserAnswer.height = v;
@@ -61,18 +53,14 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
             SizedBox(height: 32),
 
             // Weight Section
-            Text("Weight",   style: GoogleFonts.aDLaMDisplay(
-    textStyle: const TextStyle(
-    fontSize: 20,
-    fontWeight: FontWeight.w400
-    ),)),
+            Text("Weight",   style: Theme.of(context).textTheme.displaySmall),
             SizedBox(height: 8),
-            Text("${weight.toInt()} kg", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold)),
+            Text("${weight.toInt()} kg", style: Theme.of(context).textTheme.displayMedium),
             Slider(
               min: 30,
               max: 150,
               value: weight,
-              activeColor:ColorsApp.p,
+              activeColor:Theme.of(context).colorScheme.primary,
               onChanged: (v) {
                 setState(() => weight = v);
     UserAnswer.weight = v;

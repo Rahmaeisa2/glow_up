@@ -4,9 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
+import 'package:glow_up_app/features/login/presentation/login_screen.dart';
 import 'package:glow_up_app/features/onBoarding/widgets/page_view.dart';
 import 'package:glow_up_app/features/frist_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../core/routes/app_route.dart';
@@ -39,12 +41,12 @@ int currentIndex = 0;
             TextButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> FristScreen()));
 
-            }, child: const Text(
-              "Skip",style: TextStyle(
-                fontSize: 17,
-                color: ColorsApp.p,
-                fontWeight: FontWeight.bold),
-            )),
+            }, child: Text(
+              "Skip",style:Theme.of(context).textTheme.titleMedium!.copyWith(
+        color: Theme.of(context).primaryColor,
+      )
+                ),
+            ),
             const SizedBox(
               height: 100,
             ),
@@ -67,7 +69,6 @@ int currentIndex = 0;
               ],
               onPageChanged: (index){
                 setState(() {
-
                   currentIndex = index;
 
                 });
@@ -79,29 +80,34 @@ int currentIndex = 0;
                 SmoothPageIndicator(
                     controller: pageController,  // PageController
                     count:  3,
-                    effect: const ExpandingDotsEffect(
+                    effect:  ExpandingDotsEffect(
                       dotHeight: 10,
-                      activeDotColor: ColorsApp.p,
+
+                      activeDotColor:  Theme.of(context).primaryColor,
+
                     ),
                     // your preferred effect
                     onDotClicked: (index){
                     }
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async{
                     if (currentIndex < 2) {
                       pageController.nextPage(
                           duration: Duration(milliseconds: 500),
                           curve: Curves.easeInOut);
                     } else {
-                      Navigator.pushNamed(context, AppRoutes.FristScreen);
+                      final prefs =await SharedPreferences.getInstance();
+                      await prefs.setBool('onboarding_completed', true);
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>FristScreen()));
+
                     }
                   },
                   child: Container(
-                    height: 50,
+                    height: 40,
                     padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 10),
                     decoration: BoxDecoration(
-                      color: ColorsApp.p,
+                      color: Theme.of(context).colorScheme.onSurface,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: currentIndex < 2
@@ -109,16 +115,11 @@ int currentIndex = 0;
                     size: 20,)
                         :  Text(
                       "Start",
-                      style: GoogleFonts.aDLaMDisplay(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400
-                    ),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    )
                     ),
                   ),
-                )
-
 
                 )
 

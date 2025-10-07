@@ -13,6 +13,7 @@ import 'package:glow_up_app/features/profile/widget/profile_body.dart';
 import 'package:glow_up_app/features/profile/widget/state_item.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/widget/responsive.dart';
 import '../widget/Image_Picker_Bottom_Sheet.dart';
@@ -79,14 +80,11 @@ final ImagePicker picker = ImagePicker();
 
     }
   }
-
-
-
-
-
   Future<void> logout ()async{
     try{
       await FirebaseAuth.instance.signOut();
+
+
       print("user logged out");
 
     }catch(e){
@@ -108,10 +106,9 @@ final ImagePicker picker = ImagePicker();
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Profiler",style: TextStyle(
-              fontWeight: FontWeight.bold
-          ),),
-        ),
+          automaticallyImplyLeading: false,
+          title: Text("Profiler",style:Theme.of(context).textTheme.displaySmall
+        ),),
         body:FutureBuilder<Map<String, dynamic>?>(
             future: firestoreServices.getUserData(userId),
 

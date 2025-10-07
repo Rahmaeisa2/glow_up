@@ -31,8 +31,8 @@ class _TargetScreenState extends State<TargetScreen> {
             Text(
               "What's your goal?",
             style: GoogleFonts.aDLaMDisplay(
-              textStyle: const TextStyle(
-                  color: ColorsApp.p,
+              textStyle:  TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 24,
                   fontWeight: FontWeight.w400
               ),

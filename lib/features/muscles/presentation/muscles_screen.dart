@@ -48,9 +48,9 @@ class _MusclesScreenState extends State<MusclesScreen> {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.surfaceBright,
                 borderRadius: BorderRadius.circular(20),
-                boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 8)],
+                boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 5)],
               ),
               child: Center(
                 child: Padding(

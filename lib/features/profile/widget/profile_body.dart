@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:io';
 import 'dart:ffi';
 import '../../../core/routes/app_route.dart';
@@ -35,7 +36,7 @@ class ProfileBody extends StatelessWidget {
                 decoration: BoxDecoration(
 
                   borderRadius: BorderRadius.circular(16),
-                    color: ColorsApp.p.withOpacity(0.1),
+                    color: Theme.of(context).colorScheme.onInverseSurface,
                     boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)]
 
                 ),
@@ -102,11 +103,13 @@ class ProfileBody extends StatelessWidget {
         ),
         SizedBox(height: 30,),
         CustomButton(
-            background: ColorsApp.p,
-            name: "Logout", onTap: (){
+            background:Theme.of(context).primaryColor,
+            name: "Logout", onTap: ()async{
           logout();
-          Navigator.pushNamed(context, AppRoutes.login);
 
+          final prefs = await SharedPreferences.getInstance();
+          await prefs.remove("onboarding_completed");
+          Navigator.pushNamedAndRemoveUntil(context, '/loginScreen', (route) => false);
         })
       ],
     );

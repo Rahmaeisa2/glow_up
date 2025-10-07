@@ -25,7 +25,7 @@ class WorkoutCard extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).colorScheme.surfaceBright,
             borderRadius: BorderRadius.circular(16),
             boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 4)],
           ),

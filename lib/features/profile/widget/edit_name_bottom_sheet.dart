@@ -42,7 +42,7 @@ class _EditNameBottomSheetState extends State<EditNameBottomSheet> {
                         SizedBox(
                           height: 12,
                         ),
-                        CustomButton(background: ColorsApp.p,
+                        CustomButton(background:Theme.of(context).colorScheme.primary,
                           name:" Save", onTap: (){
 
                             Navigator.pop(context);
@@ -59,7 +59,7 @@ class _EditNameBottomSheetState extends State<EditNameBottomSheet> {
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
 
-                border: Border.all(color: ColorsApp.p)
+                border: Border.all(color: Theme.of(context).colorScheme.onPrimaryContainer)
             ),
             child: Icon(Icons.edit_note_sharp , size: 25,)));
 

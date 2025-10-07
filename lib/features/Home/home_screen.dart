@@ -11,8 +11,10 @@ import 'package:glow_up_app/features/Home/widget/nutrition_summary.dart';
 import 'package:glow_up_app/features/Home/widget/recommend_meals.dart';
 import 'package:glow_up_app/features/Home/widget/recommend_video_section.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../../core/routes/app_route.dart';
 import '../../core/services/recommend_video_service.dart';
+import '../../core/theming/theming_provider.dart';
 import '../../core/widget/responsive.dart';
 import '../Nutrition/model/recipe_model.dart';
 import 'Model/recommendation_video_model.dart';
@@ -47,7 +49,19 @@ class _HomeScreenState extends State<HomeScreen> {
     SizeConfig.init(context);
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(  actions: [
+        InkWell(
+          onTap: (){
+            context.read<ThemeProvider>().toggleTheme();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              context.watch<ThemeProvider>().themeMode == ThemeMode.dark
+                  ? Icons.wb_sunny
+                  : Icons.nightlight_round,),
+          ),
+        )],
         automaticallyImplyLeading: false,
         title: Text(
           "HOME",

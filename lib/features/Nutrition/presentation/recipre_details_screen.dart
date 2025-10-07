@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../model/recipe_model.dart';
+import '../widget/build_nutrition_card.dart';
 import '../widget/clipper.dart';
 
 
@@ -85,10 +86,7 @@ class RecipreDetailsScreen extends StatelessWidget {
                    crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Center(
-                      child: Text(recipe.name , style: GoogleFonts.aDLaMDisplay(
-                          textStyle: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold)),
+                      child: Text(recipe.name , style:Theme.of(context).textTheme.displayMedium,
                       ),
 
                     ),
@@ -97,12 +95,10 @@ class RecipreDetailsScreen extends StatelessWidget {
                        return  Text(
                          textAlign: TextAlign.center,
                        step,
-                       style: GoogleFonts.aDLaMDisplay(
-                       textStyle: const TextStyle(
-                       fontSize: 17,
-                       color: Colors.black,
-                       ),
-                       ));
+                       style:Theme.of(context).textTheme.titleLarge!.copyWith(
+
+                         color: Theme.of(context).colorScheme.onSurface
+                       ),);
                        }
                    ) ,
                     Divider(
@@ -117,10 +113,10 @@ class RecipreDetailsScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        _buildNutritionCard("${recipe.carbs} g", "Carbs"),
-                        _buildNutritionCard("${recipe.calories} g", "Calories"),
-                        _buildNutritionCard("${recipe.fats} g", "Fats"),
-                        _buildNutritionCard("${recipe.protein} g", "Protein"),
+                        BuildNutritionCard(value: "${recipe.carbs} g",title: "Carbs"),
+                        BuildNutritionCard(value:"${recipe.calories} g", title: "Calories"),
+                        BuildNutritionCard(value:"${recipe.fat} g",title:  "Fats"),
+                        BuildNutritionCard(value: "${recipe.protein} g", title: "Protein"),
 
                       ],
                     ),
@@ -146,25 +142,18 @@ class RecipreDetailsScreen extends StatelessWidget {
                       children: recipe.ingredients.map((ingredient) {
                         return Chip(
                           label: Text("${ingredient['name']} (${ingredient['quantity']})",
-                            style: GoogleFonts.aDLaMDisplay(
-                                textStyle: const TextStyle(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400)),),
+                            style: Theme.of(context).textTheme.titleLarge!.copyWith(
+
+                              color: Theme.of(context).colorScheme.surface
+                          ),),
                           backgroundColor: Colors.grey[200],
                         );
                       }).toList(),
                     )
-
-
-
-                  ]),
-               ))
-
-
-
-
-
-
+                  ]
+                 ),
+               )
+             )
            ],
          ),
       ),
@@ -172,26 +161,3 @@ class RecipreDetailsScreen extends StatelessWidget {
   }
 }
 
-Widget _buildNutritionCard(String value, String title) {
-  return Column(
-    children: [
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: Text(
-          value,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-        ),
-      ),
-      const SizedBox(height: 5),
-      Text(
-        title,
-        style: TextStyle(fontSize: 15, color: Colors.black ,
-        fontWeight: FontWeight.w600),
-      ),
-    ],
-  );
-}

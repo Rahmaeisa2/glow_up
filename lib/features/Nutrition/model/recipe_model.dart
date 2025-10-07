@@ -9,7 +9,7 @@ class RecipeModel {
   final int protein ;
   final int carbs;
   final List<Map<String, dynamic>> ingredients;
-  final int fats;
+  final int fat;
   final List<String>steps ;
   final String tips;
 
@@ -23,7 +23,7 @@ class RecipeModel {
     required this.tags,
     required this.protein,
     required this.carbs,
-    required this.fats,
+    required this.fat,
     required this.ingredients,
     required this.steps,
     required this.tips,
@@ -37,11 +37,11 @@ class RecipeModel {
       name: data['name'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       target: data['target'] ?? '',
-      calories: data['calories'] ?? 0,
       tags: List<String>.from(data['tags'] ?? []),
-      protein: data['protein'] ??0,
-      carbs: data['carbs'] ??0,
-      fats: data['fats'] ??0,
+      calories: int.tryParse(data['calories'].toString()) ?? 0,
+      protein: int.tryParse(data['protein'].toString()) ?? 0,
+      carbs: int.tryParse(data['carbs'].toString()) ?? 0,
+      fat: int.tryParse(data['fat'].toString()) ?? 0,
       ingredients: List<Map<String, dynamic>>.from(data['ingredients'] ?? []),
       steps: List<String>.from(data['steps'] ?? []),
       tips: data['tips'] ??'',
