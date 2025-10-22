@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NutritionCard extends StatefulWidget {
   final String title;
@@ -58,8 +59,8 @@ class _NutritionCardState extends State<NutritionCard> {
                 children: [
                   Text(
                     widget.title,
-                    style: const TextStyle(
-                      fontSize: 15,
+                    style:  TextStyle(
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white70,
                     ),

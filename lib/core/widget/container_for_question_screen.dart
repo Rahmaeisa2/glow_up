@@ -22,8 +22,7 @@ class ContainerForQuestionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-
+      child:Container(
         margin: EdgeInsets.only(bottom: 16),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         decoration: BoxDecoration(
@@ -35,7 +34,7 @@ class ContainerForQuestionScreen extends StatelessWidget {
             ),
           ],
 
-        color:  isSelected?  Theme.of(context).colorScheme.surfaceContainer : Theme.of(context).colorScheme.surfaceVariant,
+          color: isSelected ?  Theme.of(context).colorScheme.surfaceContainer: Theme.of(context).colorScheme.surfaceVariant,
           border: Border.all(
             color: isSelected? Colors.white24 :Colors.transparent,
             width: 2,

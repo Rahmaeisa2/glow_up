@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glow_up_app/features/workout/model/workout_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -42,7 +43,7 @@ class RecipeCard extends StatelessWidget {
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                   width: double.infinity,
-                  height: 140,
+                  height: 120.h,
                 ),
                 SizedBox(
                   height: 10,
@@ -50,10 +51,11 @@ class RecipeCard extends StatelessWidget {
 
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: Text(recipe.name,
-                  style: GoogleFonts.aDLaMDisplay(
-                      textStyle: const TextStyle(
-                      fontSize: 15,))),
+                  child: Text(overflow: TextOverflow.ellipsis,
+                      recipe.name,
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Theme.of(context).colorScheme.primary
+                      )),
                 ),
                 SizedBox(height: 10,),
                 Padding(
@@ -61,15 +63,15 @@ class RecipeCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${recipe.calories} kcal", style: GoogleFonts.aDLaMDisplay(
-                          textStyle: const TextStyle(
-                            fontSize: 13,)),
-                      ),
+                      Text("${recipe.calories} kcal", style:Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary
+                  )),
+
                       InkWell(
                         onTap: onTap,
                         child: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w400,
                           shadows: [
                           BoxShadow(color: Colors.grey.shade300,blurRadius: 4)
                         ],),

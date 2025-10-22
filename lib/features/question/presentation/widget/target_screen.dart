@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/widget/user-answers.dart';
+import 'package:glow_up_app/features/question/provider/user_onboarding_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/theming/app_color.dart';
 import '../../../../core/widget/container_for_question_screen.dart';
@@ -22,6 +24,7 @@ class _TargetScreenState extends State<TargetScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserOnboardingProvider>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 23, vertical: 50),
@@ -39,14 +42,14 @@ class _TargetScreenState extends State<TargetScreen> {
             )),
             SizedBox(height: 40),
             ...targets.map((target) {
-              bool isSelected = selectedTarget == target["title"];
+              bool isSelected = provider.user.target == target["title"];
               return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    selectedTarget = target["title"];
-                    UserAnswer.target = target["title"];
-                  });
-                },
+                  onTap: () {
+                    provider.updateTarget(target["title"]);
+                    setState(() {
+                      selectedTarget = target["title"];
+                    });
+                  },
                 child:
                 ContainerForQuestionScreen(emoji: target['emoji'], title: target['title'], isSelected: isSelected,
                   

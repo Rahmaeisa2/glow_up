@@ -43,6 +43,8 @@ class CustomTextFormField extends StatelessWidget {
         ),
          SizedBox(height: 9),
         TextFormField(
+          style: Theme.of(context).textTheme.titleMedium
+          ,
           onChanged: onChanged,
           obscureText: isPassword ? isObscure : false,
           keyboardType: title == "Password"
@@ -51,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
           validator: validator,
           controller: controller,
           decoration: InputDecoration(
+
             prefixIcon:  prefixIcon != null ? Icon(prefixIcon) : null,
             suffixIcon: isPassword
                 ? IconButton(
@@ -61,6 +64,7 @@ class CustomTextFormField extends StatelessWidget {
             )
                 : null,
             hintText: hintText,
+            hintStyle:Theme.of(context).textTheme.bodyMedium,
             border:Theme.of(context).inputDecorationTheme.enabledBorder
           ),
         ),

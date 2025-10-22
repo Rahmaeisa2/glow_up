@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/routes/app_route.dart';
 import '../model/workout_model.dart';
@@ -33,18 +34,26 @@ class PreviewWorkout extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 15),
-          Text(name, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          Text(muscle, style: const TextStyle(color: Colors.grey ,
-          fontSize: 18)),
+           SizedBox(height: 17.h),
+          Text(name,  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+              color: Theme.of(context).colorScheme.primary
+          )),
+          Text(muscle,  style: Theme.of(context).textTheme.titleMedium!.copyWith(
+              color: Theme.of(context).colorScheme.primary
+          )),
           const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, AppRoutes.workoutDetails ,
-                  arguments: workout
-              );
-            },
-            child: const Text("Start"),
+          Container(
+            height: 46.h,
+            width: 90.w,
+            child: ElevatedButton(
+
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.workoutDetails ,
+                    arguments: workout
+                );
+              },
+              child: const Text("Start"),
+            ),
           ),
         ],
       ),

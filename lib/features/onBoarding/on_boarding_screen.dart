@@ -42,8 +42,8 @@ int currentIndex = 0;
               Navigator.push(context, MaterialPageRoute(builder: (context)=> FristScreen()));
 
             }, child: Text(
-              "Skip",style:Theme.of(context).textTheme.titleMedium!.copyWith(
-        color: Theme.of(context).primaryColor,
+              "Skip",style:Theme.of(context).textTheme.bodyMedium!.copyWith(
+        color: Theme.of(context).colorScheme.onSecondary,
       )
                 ),
             ),
@@ -83,7 +83,7 @@ int currentIndex = 0;
                     effect:  ExpandingDotsEffect(
                       dotHeight: 10,
 
-                      activeDotColor:  Theme.of(context).primaryColor,
+                      activeDotColor: Theme.of(context).colorScheme.onPrimary,
 
                     ),
                     // your preferred effect

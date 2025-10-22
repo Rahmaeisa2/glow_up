@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/theming/app_color.dart';
+import 'package:glow_up_app/features/question/provider/user_onboarding_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/widget/user-answers.dart';
 import '../question_onboarding.dart';
@@ -11,15 +13,30 @@ class SliderHeightWeightScreen extends StatefulWidget {
 }
 
 class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
-  double height = 160;
-  double weight = 60;
-  double sliderValue = 5;
 
 
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     final provider = Provider.of<UserOnboardingProvider>(context, listen: false);
+     if(provider.user.height !=null){
+       height = provider.user.height!;
+     }
+    if(provider.user.weight !=null){
+      weight = provider.user.weight!;
+    }
+
+  }
+
+double height = 160;
+double weight = 60;
+double sliderValue = 5;
 
 
-  @override
+@override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserOnboardingProvider>(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 48),
@@ -30,9 +47,7 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
               "Let's set your height & weight",
             style: Theme.of(context).textTheme.displaySmall,
                     ),
-
             SizedBox(height: 40),
-
             // Height Section
             Text("Height", style: Theme.of(context).textTheme.displaySmall,),
             SizedBox(height: 8),
@@ -46,8 +61,7 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
               activeColor:Theme.of(context).colorScheme.primary,
               onChanged: (v) {
                 setState(() => height = v);
-                UserAnswer.height = v;
-
+                provider.updateHeight(v.toString());
               },
             ),
             SizedBox(height: 32),
@@ -63,7 +77,7 @@ class _SliderHeightWeightScreenState extends State<SliderHeightWeightScreen> {
               activeColor:Theme.of(context).colorScheme.primary,
               onChanged: (v) {
                 setState(() => weight = v);
-    UserAnswer.weight = v;
+    provider.updateWeight(v.toString());
     },
 
             ),

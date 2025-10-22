@@ -21,7 +21,7 @@ class WorkoutCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 6,
-          vertical: 12
+          vertical: 10
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -45,13 +45,13 @@ class WorkoutCard extends StatelessWidget {
                 )
                 ,
                 const SizedBox(height: 10),
-                Text(
+                Text(overflow: TextOverflow.ellipsis,
                   workout.name,
-                  style: GoogleFonts.aDLaMDisplay(
-                    textStyle: const TextStyle(fontSize: 18),
-                  ),
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.primary
+                    )
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 6),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -59,8 +59,9 @@ class WorkoutCard extends StatelessWidget {
                     children: [
                       Text(
                         "${workout.sets}×${workout.reps}",
-                        style: const TextStyle(fontSize: 17 ,
-                        fontWeight: FontWeight.w700),
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.primary
+                  )
                       ),
                       InkWell(
                         onTap: onTap,

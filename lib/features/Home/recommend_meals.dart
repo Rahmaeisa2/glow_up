@@ -6,9 +6,11 @@ import 'package:glow_up_app/core/services/recipe_service.dart';
 import 'package:glow_up_app/features/Nutrition/model/recipe_model.dart';
 import 'package:glow_up_app/features/Nutrition/presentation/recipre_details_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-import '../../../core/widget/user-answers.dart';
-import '../../Nutrition/Data/recipre.dart';
+import '../../core/widget/user-answers.dart';
+import '../Nutrition/Data/recipre.dart';
+import '../question/provider/user_onboarding_provider.dart';
 class RecommendMeals extends StatefulWidget {
   const RecommendMeals({super.key});
 
@@ -26,7 +28,9 @@ class _RecommendMealsState extends State<RecommendMeals> {
   }
   @override
   Widget build(BuildContext context) {
-    String userTarget = (UserAnswer.target ?? 'stay_fit').toLowerCase().replaceAll(' ', '_');
+    final provider = Provider.of<UserOnboardingProvider>(context);
+
+    String userTarget = (provider.user.target ?? 'stay_fit').toLowerCase().replaceAll(' ', '_');
     Stream<QuerySnapshot>mealsStream ;
     try{
       mealsStream = FirebaseFirestore.instance.collection("recipes")
@@ -101,43 +105,26 @@ Widget _buildMealSection(BuildContext context, String title, List<RecipeModel> m
             children: [
               Text(
                 title,
-                style: GoogleFonts.aDLaMDisplay(
-                  textStyle: const TextStyle(
-                    color: Colors.indigo,
-                    fontSize: 24,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),              ),
+               style:Theme.of(context).textTheme.titleLarge
+
+      ),
               const SizedBox(height: 8),
               if (meals.isEmpty)
                 Text(
                   'No $title recommended',
-                  style: GoogleFonts.aDLaMDisplay(
-                    textStyle: const TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),                )
+                  style:Theme.of(context).textTheme.bodyMedium
+                  )
               else
                 ListTile(
                   title: Text(
                     meals[0].name.isNotEmpty ? meals[0].name : 'Untitled',
-                    style: GoogleFonts.aDLaMDisplay(
-                      textStyle: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),                  ),
+                      style:Theme.of(context).textTheme.titleLarge
+
+                  ),
                   subtitle: Text(
                     'Calories: ${meals[0].calories} kcal | Protein: ${meals[0].protein} g',
-                    style: GoogleFonts.aDLaMDisplay(
-                      textStyle: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w400,
-                      ),
+                    style:Theme.of(context).textTheme.titleLarge
                     ),
-                  ),
                   onTap: () {
                     Navigator.push(
                       context,

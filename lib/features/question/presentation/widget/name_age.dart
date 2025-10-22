@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
+import 'package:glow_up_app/features/question/provider/user_onboarding_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/widget/user-answers.dart';
 import '../question_onboarding.dart';
@@ -18,6 +20,7 @@ class _NameAndAgeScreenState extends State<NameAndAgeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserOnboardingProvider>(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30,
           vertical: 50),
@@ -26,19 +29,14 @@ class _NameAndAgeScreenState extends State<NameAndAgeScreen> {
           children: [
             CustomTextFormField
               (
-                onChanged: (v) {
-                  UserAnswer.name = v;
-                },
+                onChanged: provider.updateName,
                 hintText: "Enter your name", title: "Name", controller: nameController),
             SizedBox(height: 30),
         CustomTextFormField(
         
-            onChanged:(v){
-              final n = int.tryParse(v);
-              if(n !=null )UserAnswer.age=n;
-        
-        }
-            ,hintText: "Enter your age", title: "Age", controller: ageController)
+            onChanged:provider.updateAge,
+            hintText: "Enter your age", title: "Age", controller: ageController),
+
           ],
         ),
       ),

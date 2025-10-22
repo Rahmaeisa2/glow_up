@@ -52,9 +52,9 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
         ),
         title: Text(
           widget.muscleName,
-          style: GoogleFonts.aDLaMDisplay(
-            textStyle: const TextStyle(fontSize: 20),
-          ),
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            color: Theme.of(context).colorScheme.primary
+        )
         ),
       ),
       body:

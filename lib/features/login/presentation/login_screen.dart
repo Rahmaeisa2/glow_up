@@ -3,16 +3,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glow_up_app/core/widget/custom_button.dart';
 import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
 import 'package:glow_up_app/core/widget/user-answers.dart';
 import 'package:glow_up_app/test.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/routes/app_route.dart';
 
 import '../../../core/services/auth_service.dart';
 import '../../../core/widget/responsive.dart';
+import '../../question/provider/user_onboarding_provider.dart';
 
 class LoginScreen extends StatefulWidget {
 
@@ -31,10 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController loginController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
-  final dataToSave =UserAnswer.email;
+  late final provider = Provider.of<UserOnboardingProvider>(context, listen: false);
+
+  late final dataToSave =provider.user.name;
 
   @override
   Widget build(BuildContext context) {
+    final provider= Provider.of<UserOnboardingProvider>(context);
     SizeConfig.init(context);
 
     return Scaffold(
@@ -71,8 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 50
                   ),
                   CustomTextFormField(
-                      onChanged: (value) {
-                    UserAnswer.email =value;},
+                      onChanged: provider.updateName,
                       validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
@@ -101,8 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       background: Theme.of(context).colorScheme.primary,
                       onTap: () async {
                         if (formKey.currentState!.validate()) {
-                          final email = loginController.text.trim();
-                          final password = passwordController.text.trim();
+                          var email = loginController.text.trim();
+                          var password = passwordController.text.trim();
 
                           if (email.isEmpty || password.isEmpty) {
                             await AwesomeDialog(
@@ -116,9 +121,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             return;
                           }
                           await AuthService.signInWithEmail(
-                            loginController.text.trim(),
-                            passwordController.text.trim(),
-                            context,
+                              loginController.text.trim(),
+                              passwordController.text.trim(),
+                            context=context
+
                           );
                         }}
                   ),
@@ -136,7 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           });
                         }),
                         Text("Remember me?",style:
-                          Theme.of(context).textTheme.titleLarge!.copyWith(
+                          Theme.of(context).textTheme.titleMedium!.copyWith(
                             color: Theme.of(context).colorScheme.primary
                           )),
                         
@@ -145,7 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                         }, child: Text(
                         "Forget Password?" ,
-                        style:Theme.of(context).textTheme.titleLarge!.copyWith(
+                        style:Theme.of(context).textTheme.titleMedium!.copyWith(
+                          fontSize: 13.sp,
                             color: Theme.of(context).colorScheme.primary
                         )
                       )),
@@ -159,7 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Already have an account?",
-                        style:  Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        style:  Theme.of(context).textTheme.titleMedium!.copyWith(
                       color: Theme.of(context).colorScheme.surfaceContainer
                   )),
                       TextButton(onPressed: () {
@@ -167,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                       , child: Text(
                         "Sing Up",
-                          style:Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          style:Theme.of(context).textTheme.titleMedium!.copyWith(
                               color: Theme.of(context).colorScheme.primary
                           )))
                     ],

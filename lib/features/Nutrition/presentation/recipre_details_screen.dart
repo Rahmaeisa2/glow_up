@@ -86,7 +86,7 @@ class RecipreDetailsScreen extends StatelessWidget {
                    crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Center(
-                      child: Text(recipe.name , style:Theme.of(context).textTheme.displayMedium,
+                      child: Text(textAlign: TextAlign.center,recipe.name , style:Theme.of(context).textTheme.displayMedium,
                       ),
 
                     ),
@@ -144,7 +144,7 @@ class RecipreDetailsScreen extends StatelessWidget {
                           label: Text("${ingredient['name']} (${ingredient['quantity']})",
                             style: Theme.of(context).textTheme.titleLarge!.copyWith(
 
-                              color: Theme.of(context).colorScheme.surface
+                              color: Theme.of(context).colorScheme.primary
                           ),),
                           backgroundColor: Colors.grey[200],
                         );

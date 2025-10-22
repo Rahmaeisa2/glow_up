@@ -17,7 +17,7 @@ class RecipeService {
           doc.data() as Map<String, dynamic>, doc.id))
           .toList());
     }catch(e){
-      return Stream.error(e); // بيرجع ستريم فيه error
+      return Stream.error(e);
 
     }
   }

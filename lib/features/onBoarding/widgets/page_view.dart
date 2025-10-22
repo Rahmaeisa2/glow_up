@@ -34,7 +34,7 @@ class PageViewItem extends StatelessWidget {
         Text(textAlign: TextAlign.center,
           text2,
     style: Theme.of(context).textTheme.titleLarge!.copyWith(
-      color: Theme.of(context).colorScheme.surfaceContainer,
+      color: Theme.of(context).colorScheme.onBackground,
 
         ),
         )

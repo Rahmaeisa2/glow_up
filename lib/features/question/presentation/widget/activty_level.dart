@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:glow_up_app/core/widget/user-answers.dart';
+import 'package:glow_up_app/features/question/provider/user_onboarding_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/helper/avtivity_level_helper.dart';
 import '../../../../core/theming/app_color.dart';
@@ -24,20 +26,21 @@ class _ActivityLevelWidgetState extends State<ActivityLevelWidget> {
     _loadPreviousSelection();
   }
 
-  void _updateActivityLevel (index){
+  void _updateActivityLevel (index ,UserOnboardingProvider provider){
     ActivityLevel selectedLevel = ActivityLevelHelper.getActivityLevelFromIndex(index);
-    UserAnswer.activityLevel = selectedLevel.toMap();
+    provider.updateActivityLevel(selectedLevel.toMap());
 
 print("Activity Level Updated:");
-print("Name : ${selectedLevel.name}");
-    print("Name : ${selectedLevel.displayName}");
-    print("Name : ${selectedLevel.multiplier}");
-    print("UserAnswer.activityLevel :${UserAnswer.activityLevel}");
+    print("Name: ${selectedLevel.name}");
+    print("Display Name: ${selectedLevel.displayName}");
+    print("Multiplier: ${selectedLevel.multiplier}");
 
   }
   void _loadPreviousSelection() {
-    if (UserAnswer.activityLevel != null) {
-      String savedActivityName = UserAnswer.activityLevel!['name'];
+    final provider = Provider.of<UserOnboardingProvider>(context, listen: false);
+
+    if (provider.user.activityLevel != null) {
+      String savedActivityName = provider.user.activityLevel!['name'];
       int savedIndex = ActivityLevel.values.indexWhere(
             (level) => level.name == savedActivityName,
       );
@@ -52,6 +55,8 @@ print("Name : ${selectedLevel.name}");
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserOnboardingProvider>(context);
+
     return Scaffold(
 
         body: Padding(
@@ -120,7 +125,7 @@ print("Name : ${selectedLevel.name}");
                         setState(() {
                           _selectedActivityLevelIndex = value!;
                         });
-                        _updateActivityLevel(index);
+                        _updateActivityLevel(index, provider);
                       },
                     ),
                   );

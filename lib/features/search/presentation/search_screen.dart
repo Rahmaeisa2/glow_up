@@ -19,66 +19,77 @@ class _SearchScreenState extends State<SearchScreen> {
   List<Map<String, dynamic>> mealData = [];
   List<String> mealHistory = [];
   bool hasSearched = false;
+  bool isLoading= false;
   Timer? _debounce;
+  String? errorMessage;
 
-  Future<List<Map<String, dynamic>>> searchMeal() async {
-    String query = _controller.text.trim();
-    print("Searching for $query");
+  Future<List<Map<String,dynamic>>> searchMeal(String query) async {
+    query = _controller.text.trim();
+    if (query.isEmpty) {
+      setState(() {
+        mealData = [];
+        hasSearched = false;
+        isLoading = false;
+        errorMessage = null;
+      });
+      return [];
+    }
+      setState(() {
+        isLoading = true;
+        hasSearched = true;
+      });
+
+
+      try{
 
     if (!mealHistory.contains(query) && query.isNotEmpty) {
       mealHistory.add(query);
       await LocalCache.saveMeals(mealHistory.map((e) => {'query': e}).toList());
     }
 
-    final snapshot = await FirebaseFirestore.instance
-        .collection("meals")
-        .where('name', isGreaterThanOrEqualTo: query.toLowerCase())
-        .where('name', isLessThanOrEqualTo: query + '\uf8ff')
-        .get();
+      final snapshot = await FirebaseFirestore.instance
+          .collection("meals")
+          .where('namelower', isGreaterThanOrEqualTo: query.toLowerCase())
+          .where('namelower', isLessThanOrEqualTo: query.toLowerCase() + '\uf8ff')
+          .get();
 
-    print("Documents found: ${snapshot.docs.length}");
-    final results = snapshot.docs.map((doc) => doc.data()).toList();
+      print("Documents found: ${snapshot.docs.length}");
+      final results = snapshot.docs.map((doc) => doc.data()).toList();
+
 
     setState(() {
-      hasSearched = true;
       mealData = results;
+      isLoading = false;
+      hasSearched=true;
     });
-
-    if (results.isNotEmpty) {
-      print("Meals found: ${mealData.length}");
-    } else {
-      print("No meal found for '$query'");
-    }
-    return results;
+      if (results.isNotEmpty) {
+        print("Meals found: ${mealData.length}");
+      } else {
+        print("No meal found for '$query'");
+      }
+      return results;
+    } catch (e) {
+        setState(() {
+          mealData = [];
+          isLoading = false;
+        });
+        print('❌ Search error: $e');
+      }
+      return[];
   }
-  Future<void> getRecommendedMeals() async {
-    final snapshot = await FirebaseFirestore.instance
-        .collection("meals")
-        .where("isRecommended", isEqualTo: true)
-        .get();
 
-    final recommended = snapshot.docs.map((doc) => doc.data()).toList();
-    setState(() {
-      mealData = recommended;
-      hasSearched = true;
-    });
-  }
 
   void onSearchChanged(String query) {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () {
-      searchMeal();
+      searchMeal(query.trim());
     });
   }
   @override
   void initState() {
     super.initState();
-    getRecommendedMeals();
-    if(_controller.text.isEmpty){
-      getRecommendedMeals();
-    }else{
-      searchMeal();
-    }
+
+    mealData = [];
   }
   @override
   Widget build(BuildContext context) {
@@ -103,29 +114,43 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 hintText: 'Enter meal name...',
                 suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: searchMeal,
+                  icon: const Icon(Icons.search), onPressed: () {  },
                 ),
               ),
             ),
             SizedBox(height: 12,),
-            ElevatedButton(onPressed: ()async{
-                await LocalCache.clearMeals();
-          setState(() {
-    mealHistory.clear();
-    });
-              print("History cleared!");
-              },
-              child: Text("Clear Search History"),
-            ),
 
-            const SizedBox(height: 26),
             const SizedBox(height: 20),
             Expanded(
-              child: hasSearched
-                  ? (mealData.isEmpty
-                  ? const Center(child: Text('No results found'))
+              child:RefreshIndicator(
+                  onRefresh: () async {
+                   await searchMeal(_controller.text.trim());
+
+                  },
+                  child: isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : errorMessage != null
+                      ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.error, size: 64, color: Colors.red),
+                        Text(errorMessage!),
+                        ElevatedButton(
+                          onPressed: () => searchMeal(_controller.text.trim()),
+                          child: Text('إعادة المحاولة'),
+                        ),
+                      ],
+                    ),
+                  )
+                      : mealData.isEmpty && hasSearched
+                      ? Center(child: Text('No result match"${_controller.text}"'))
+                      : mealData.isEmpty
+                      ? Center(child: Text('Start searching...'))
+
                   : ListView.builder(
+
+                      physics: AlwaysScrollableScrollPhysics(),
                   itemCount: mealData.length,
                   itemBuilder: (context, index) {
                     final meal = mealData[index];
@@ -160,10 +185,12 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
                       ),
                     );
-                  }))
-                  : const Center(child: Text('Search for a meal')),
-            ),
-          ],
+                  }
+
+        ) )
+
+      )
+          ]
         ),
       ),
     );

@@ -8,6 +8,8 @@ import 'package:glow_up_app/features/question/presentation/widget/gender.dart';
 import 'package:glow_up_app/features/question/presentation/widget/height_weight.dart';
 import 'package:glow_up_app/features/question/presentation/widget/name_age.dart';
 import 'package:glow_up_app/features/question/presentation/widget/target_screen.dart';
+import 'package:glow_up_app/features/question/provider/user_onboarding_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../core/routes/app_route.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../core/services/calories_sevices.dart';
@@ -35,7 +37,7 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
   void _msg(String m) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(m)));
   }
-  Future<void> _submitToFirestore() async {
+  Future<void> _submitToFirestore(UserOnboardingProvider provider) async {
 
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) {
@@ -47,11 +49,10 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
 
     print("✅ User signed in: ${user.uid}");
 
-    Map<String, dynamic> dataToSave = UserAnswer.toMap();
-    dataToSave['createdAt'] = FieldValue.serverTimestamp();
+    Map<String, dynamic> dataToSave = provider.user.toMap();
     dataToSave['updatedAt'] = FieldValue.serverTimestamp();
     dataToSave['userId'] = user.uid;
-    Map<String, dynamic>? nutritionPlan = CalorieCalculatorService.calculateFromUserAnswer();
+    Map<String, dynamic>? nutritionPlan = CalorieCalculatorService.calculateFromUserAnswer(provider.user);
 
     print("📦 Data to save: $dataToSave");
 
@@ -76,8 +77,8 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
     }
   }
   //for check it done or nor
-   _printNutritionPlan()async {
-    var nutritionPlan = CalorieCalculatorService.calculateFromUserAnswer();
+   _printNutritionPlan(UserAnswer userAnswer)async {
+    var nutritionPlan = CalorieCalculatorService.calculateFromUserAnswer(userAnswer);
 
     if (nutritionPlan != null) {
       print("✅ Nutrition Plan:");
@@ -95,6 +96,7 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
   @override
 
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserOnboardingProvider>(context);
     SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
@@ -164,8 +166,8 @@ class _QuestionOnBoardingState extends State<QuestionOnBoarding> {
                    _isLoading=true;
                  });
                  try{
-                   await _submitToFirestore();
-                   await _printNutritionPlan();
+                   await _submitToFirestore(provider);
+                   await _printNutritionPlan(provider.user);
                    Navigator.pushNamed(context, AppRoutes.navBar);
 
                  }finally{

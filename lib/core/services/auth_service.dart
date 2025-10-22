@@ -7,29 +7,29 @@ import 'package:glow_up_app/core/routes/app_route.dart';
 class AuthService{
   final firebase_auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
- static Future<User?> signInWithEmail (String email, String Password , context) async {
+  static Future<User?> signInWithEmail (String email, String Password , context) async {
     try {
 
-     final userCredential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: Password);
+      final userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: Password);
 
-    final user = FirebaseAuth.instance.currentUser;
-    if(user!=null && user.emailVerified){
-      print("email is varified , login ${user.email}");
-      Navigator.pushNamed(context, AppRoutes.questions);
-    }else{
-      print("email is not verified");
-      await AwesomeDialog(
-        context: context,
-        dialogType: DialogType.warning,
-        animType: AnimType.rightSlide,
-        title: 'Email not verified',
-        desc: 'Please verify your email before logging in.',
-        btnOkOnPress: () async {
-          await user?.sendEmailVerification();
-        },
-      ).show();
-    }
+      final user = FirebaseAuth.instance.currentUser;
+      if(user!=null && user.emailVerified){
+        print("email is varified , login ${user.email}");
+        Navigator.pushNamed(context, AppRoutes.questions);
+      }else{
+        print("email is not verified");
+        await AwesomeDialog(
+          context: context,
+          dialogType: DialogType.warning,
+          animType: AnimType.rightSlide,
+          title: 'Email not verified',
+          desc: 'Please verify your email before logging in.',
+          btnOkOnPress: () async {
+            await user?.sendEmailVerification();
+          },
+        ).show();
+      }
     } on FirebaseAuthException catch (e) {
       print("❌ FirebaseAuthException: ${e.code} - ${e.message}");
 
@@ -72,7 +72,7 @@ class AuthService{
     }
     return null;
 
- }
+  }
 
 
 }

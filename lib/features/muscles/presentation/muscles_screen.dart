@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glow_up_app/core/routes/app_route.dart';
 import 'package:google_fonts/google_fonts.dart';
 class MusclesScreen extends StatefulWidget {
@@ -21,10 +22,11 @@ class _MusclesScreenState extends State<MusclesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,  backgroundColor: Theme.of(context).colorScheme.surface,
+
+
         centerTitle: true,
-        title: Text("Muscles",style: GoogleFonts.aDLaMDisplay(
-            textStyle: const TextStyle(
-              fontSize: 20,))),
+        title: Text("Muscles",style: Theme.of(context).textTheme.displaySmall),
         automaticallyImplyLeading: false,
       ),
       body: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -62,13 +64,13 @@ class _MusclesScreenState extends State<MusclesScreen> {
                     children: [
                       Image.network(muscle['imageUrl'] ?? '',
                         fit: BoxFit.cover,
-                        height: 140,
+                        height: 120.h,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(height: 14.h,),
                       Text(muscle['name'] ?? "",
-                        style:  GoogleFonts.aDLaMDisplay(
-                            textStyle: const TextStyle(
-                              fontSize: 18,))),
+                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
+color: Theme.of(context).colorScheme.primary
+                      )),
                     ],
                   ),
                 ),

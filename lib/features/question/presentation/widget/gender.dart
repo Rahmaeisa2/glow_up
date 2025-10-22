@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/theming/app_color.dart';
 import '../../../../core/widget/user-answers.dart';
+import '../../provider/user_onboarding_provider.dart';
 
 class GenderSelectionWidget extends StatefulWidget {
 
@@ -20,8 +22,11 @@ class _GenderSelectionWidgetState extends State<GenderSelectionWidget> {
   TextEditingController height = TextEditingController();
 
 bool? isMale =null;
+bool isSelected =false ;
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<UserOnboardingProvider>(context);
+
     return GestureDetector(
         onTap: () {
       setState(() {
@@ -54,12 +59,12 @@ bool? isMale =null;
     setState(() {
     isMale = true;
     });
-    UserAnswer.gender = "Male";
+    provider.updateGender("Male");
     },
                   child: Container(
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceBright,
+                    color: isSelected? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.outline,
                     borderRadius: BorderRadius.circular(12),
                      border: Border.all(
                         color: (isMale == true) ? Theme.of(context).colorScheme.primary: Colors.transparent,
@@ -70,12 +75,13 @@ bool? isMale =null;
                       children: [
                         Icon(Icons.male, size: 60, color:Theme.of(context).colorScheme.primary),
                         Text("Male",
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                fontWeight: isSelected ? FontWeight.w700 : FontWeight.normal,
+
                                 color:
-                                Theme.of(context).colorScheme.primary
-
-
-                  )),
+                            Theme.of(context).colorScheme.primary)
+                        )
                       ],
                     ),
                   ),
@@ -90,7 +96,7 @@ bool? isMale =null;
                       setState(() {
                         isMale = false;
                       });
-                      UserAnswer.gender = "female";
+                      provider.updateGender("Female");
 
                   },
 
@@ -98,7 +104,7 @@ bool? isMale =null;
 
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceBright,
+                      color: isSelected? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.outline,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: (isMale == false) ? Theme.of(context).colorScheme.primary : Colors.transparent,
@@ -108,10 +114,11 @@ bool? isMale =null;
                     child: Column(
                       children: [
                         Icon(Icons.female, size: 60, color: Theme.of(context).colorScheme.primary),
-                        Text("Female", style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        Text("Female",   style:
+                        Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                             color:
-                            Theme.of(context).colorScheme.primary
-                        )),
+                            Theme.of(context).colorScheme.primary)),
                       ],
                     ),
                   ),

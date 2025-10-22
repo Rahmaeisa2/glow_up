@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:glow_up_app/core/widget/custom_text_form_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/routes/app_route.dart';
+import '../../../core/services/auth_service.dart';
 import '../../../core/theming/app_color.dart';
 import '../../../core/widget/responsive.dart';
 
@@ -135,55 +138,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   name: "Register",
                   background:Theme.of(context).colorScheme.primary,
                     onTap: () async {
-                      if (formKey.currentState!.validate()) {
-                        try {
-                          final credential = await FirebaseAuth.instance
-                              .createUserWithEmailAndPassword(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          );
 
-                          await FirebaseAuth.instance.currentUser!
-                              .sendEmailVerification();
+                          if (formKey.currentState!.validate()) {
+                            try {
+                              final credential = await FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
 
-                          AwesomeDialog(
-                            context: context,
-                            dialogType: DialogType.success,
-                            animType: AnimType.rightSlide,
-                            title: 'Account Created',
-                            desc: 'A confirmation email has been sent to your email address. Please confirm your email before logging in.',
-                            btnOkText: "OK",
-                            btnOkOnPress: () {
-                              Navigator.pushNamed(context, AppRoutes.login);
-                            },
-                          )
-                            .show();
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'weak-password') {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.info,
-                              animType: AnimType.rightSlide,
-                              title: 'Weak Password',
-                              desc: 'Please choose a stronger password.',
-                              btnOkOnPress: () {},
-                            )
-                              .show();
-                          } else if (e.code == 'email-already-in-use') {
-                            AwesomeDialog(
-                              context: context,
-                              dialogType: DialogType.info,
-                              animType: AnimType.rightSlide,
-                              title: 'Email Already in Use',
-                              desc: 'This email is already associated with another account.',
-                              btnOkOnPress: () {},
-                            )
-                              .show();
-                          }
-                        } catch (e) {
-                          print(e);
-                        }
-                      }
+                              await FirebaseAuth.instance.currentUser!
+                                  .sendEmailVerification();
+
+                              AwesomeDialog(
+                                context: context,
+                                dialogType: DialogType.success,
+                                animType: AnimType.rightSlide,
+                                title: 'Account Created',
+                                desc: 'A confirmation email has been sent to your email address. Please confirm your email before logging in.',
+                                btnOkText: "OK",
+                                btnOkOnPress: () {
+                                  Navigator.pushNamed(context, AppRoutes.login);
+                                },
+                              )
+                                  .show();
+                            } on FirebaseAuthException catch (e) {
+                              if (e.code == 'weak-password') {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.info,
+                                  animType: AnimType.rightSlide,
+                                  title: 'Weak Password',
+                                  desc: 'Please choose a stronger password.',
+                                  btnOkOnPress: () {},
+                                )
+                                    .show();
+                              } else if (e.code == 'email-already-in-use') {
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.info,
+                                  animType: AnimType.rightSlide,
+                                  title: 'Email Already in Use',
+                                  desc: 'This email is already associated with another account.',
+                                  btnOkOnPress: () {},
+                                )
+                                    .show();
+                              }
+                            } catch (e) {
+                              print(e);
+                            }}
                   }
                 )
               ],

@@ -8,7 +8,7 @@ import 'package:glow_up_app/core/theming/app_color.dart';
 import 'package:glow_up_app/core/widget/user-answers.dart';
 import 'package:glow_up_app/features/Home/widget/nutrition_card.dart';
 import 'package:glow_up_app/features/Home/widget/nutrition_summary.dart';
-import 'package:glow_up_app/features/Home/widget/recommend_meals.dart';
+import 'package:glow_up_app/features/Home/recommend_meals.dart';
 import 'package:glow_up_app/features/Home/widget/recommend_video_section.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +17,7 @@ import '../../core/services/recommend_video_service.dart';
 import '../../core/theming/theming_provider.dart';
 import '../../core/widget/responsive.dart';
 import '../Nutrition/model/recipe_model.dart';
+import '../question/provider/user_onboarding_provider.dart';
 import 'Model/recommendation_video_model.dart';
 import 'data/recommended_video_data.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -42,8 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    String userTarget = (UserAnswer.target ?? 'stay_fit').toLowerCase().replaceAll(' ', '_');
-    print('UserAnswer.target: ${UserAnswer.target}');
+    final provider = Provider.of<UserOnboardingProvider>(context, listen: false);
+    String userTarget = (provider.user.target ?? 'stay_fit').toLowerCase().replaceAll(' ', '_');
+    print('UserAnswer.target: ${provider.user.target}');
     print('userTarget after null check: $userTarget');
 
     SizeConfig.init(context);
